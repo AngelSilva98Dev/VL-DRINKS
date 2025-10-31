@@ -1,0 +1,9 @@
+C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaDatos\bin\Debug\CapaDatos.dll
+C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaDatos\bin\Debug\CapaDatos.pdb
+C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaDatos\bin\Debug\CapaEntidad.dll
+C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaDatos\bin\Debug\CapaEntidad.pdb
+C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaDatos\obj\Debug\CapaDatos.csproj.AssemblyReference.cache
+C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaDatos\obj\Debug\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaDatos\obj\Debug\CapaDatos.csproj.Up2Date
+C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaDatos\obj\Debug\CapaDatos.dll
+C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaDatos\obj\Debug\CapaDatos.pdb
