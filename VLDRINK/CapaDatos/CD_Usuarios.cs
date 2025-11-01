@@ -9,7 +9,7 @@ using System.Data;
 
 namespace CapaDatos
 {
-    public  class CD_Usuarios
+    public class CD_Usuarios
     {
         public List<Usuario> Listar()
         {
@@ -51,5 +51,49 @@ namespace CapaDatos
 
             return lista;
         }
+
+        public Usuario ObtenerUsuarioPorCorreo(string correo)
+        {
+            Usuario usuario = null; // Inicia como nulo
+            try
+            {
+                using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
+                {
+                    // Traemos TODOS los datos, incluido Hash y Salt
+                    string consulta = "SELECT IdUsuario, Nombres, Apellidos, Correo, Reestablecer, Activo, PasswordHash, PasswordSalt FROM USUARIO WHERE Correo = @correo";
+
+                    SqlCommand comando = new SqlCommand(consulta, objConexion);
+                    comando.Parameters.AddWithValue("@correo", correo);
+                    comando.CommandType = CommandType.Text;
+
+                    objConexion.Open();
+
+                    using (SqlDataReader lector = comando.ExecuteReader())
+                    {
+                        if (lector.Read()) // Si encontramos al usuario
+                        {
+                            usuario = new Usuario
+                            {
+                                IdUsuario = Convert.ToInt32(lector["IdUsuario"]),
+                                Nombres = lector["Nombres"].ToString(),
+                                Apellidos = lector["Apellidos"].ToString(),
+                                Correo = lector["Correo"].ToString(),
+                                Reestablecer = Convert.ToBoolean(lector["Reestablecer"]),
+                                Activo = Convert.ToBoolean(lector["Activo"]),
+                                PasswordHash = (byte[])lector["PasswordHash"],
+                                PasswordSalt = (byte[])lector["PasswordSalt"]
+                            };
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                usuario = null; // Si hay un error, devolvemos nulo
+            }
+            return usuario;
+        }
+
     }
+
 }

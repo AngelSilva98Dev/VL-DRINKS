@@ -45,14 +45,10 @@
 
             $('#tabla').DataTable({
                 "ajax": {
-                    // --- CORRECCIÓN AQUÍ ---
-                    // "url" debe apuntar al método "ListarUsuarios" en el "HomeController"
                     "url": "@Url.Action("ListarUsuarios", "Home")",
                     "type": "GET",
                     "dataType": "json"
 
-                    // ¡IMPORTANTE! Asegúrate de que NO tienes la línea "dataSrc": ""
-                    // ya que tu controlador devuelve { "data": ... }
                 },
                 "columns": [
                     { "data": "Nombres" },
