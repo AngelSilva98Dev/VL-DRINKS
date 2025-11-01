@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\controllers\\mantenedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\mantenedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\controllers\\mantenedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\mantenedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,13 +38,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
               "RelativeToolTip": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-31T00:03:05.644Z"
             },
@@ -56,13 +56,13 @@
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAGUAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAGMAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-30T23:47:21.413Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "MantenedorController.cs",
               "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
@@ -80,7 +80,7 @@
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
               "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
               "RelativeToolTip": "CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAADQAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAuwF8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-30T23:28:10.299Z",
               "EditorCaption": ""

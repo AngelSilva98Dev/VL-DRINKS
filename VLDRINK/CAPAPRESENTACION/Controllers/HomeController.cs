@@ -25,7 +25,7 @@ namespace CAPAPRESENTACION.Controllers
         {
             List<Usuario> listaUsuario = new List<Usuario>();
             listaUsuario = new CN_Usuarios().Listar();
-            return Json(listaUsuario,JsonRequestBehavior.AllowGet);
+            return Json(new { data = listaUsuario },JsonRequestBehavior.AllowGet);
         }
     }
 }
