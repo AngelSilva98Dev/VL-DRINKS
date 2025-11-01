@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CapaEntidad
 {
@@ -14,10 +16,15 @@ namespace CapaEntidad
         public string Apellidos { get; set; }
 
         public string Correo   { get; set; }
-        public string Clave { get; set; }
 
         public bool Reestablecer { get; set; }
 
         public bool Activo { get; set; }
+
+        [MaxLength(64)]
+        public byte[] PasswordHash { get; set; }
+
+        [MaxLength(32)]
+        public byte[] PasswordSalt { get; set; }
     }
 }

@@ -9,24 +9,31 @@ namespace CAPAPRESENTACION
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new Bundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                                    "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new Bundle("~/bundles/complementos").Include("~/Scripts/fontawesome/all.min.js",
-                       "~/Scripts/scripts.js"));
-
-            //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-            //            "~/Scripts/jquery.validate*"));
-
-            //// Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información sobre los formularios.  De esta manera estará
-            //// para la producción, use la herramienta de compilación disponible en https://modernizr.com para seleccionar solo las pruebas que necesite.
-            //bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-            //            "~/Scripts/modernizr-*"));
+                                   "~/Scripts/scripts.js"));
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.bundle.js"));
+                                    "~/Scripts/bootstrap.bundle.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include( "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
+
+            // --- ⬇️ CORREGIDO ⬇️ ---
+            // Las rutas ahora apuntan a ~/Scripts/ en lugar de ~/Scripts/DataTables/
+            // y se ha corregido el nombre de 'jquery.dataTables.min.js' a 'dataTables.min.js'
+
+            // Bundle para el JavaScript de DataTables
+            bundles.Add(new Bundle("~/bundles/datatables").Include(
+                                    "~/Scripts/dataTables.min.js", // Corregido
+                                    "~/Scripts/dataTables.bootstrap5.min.js")); // Corregido
+
+            // Bundle para el CSS de DataTables
+            // Asumiendo que el CSS está en Content/dataTables.bootstrap5.min.css
+            // (Si no, muéstrame tu carpeta Content)
+            bundles.Add(new StyleBundle("~/Content/datatables").Include(
+                                    "~/Content/dataTables.bootstrap5.min.css"));
         }
     }
 }

@@ -1,21 +1,75 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\",
+  "WorkspaceRootPath": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|c:\\users\\nahuel\\onedrive\\escritorio\\trabajopracticop2\\vldrink\\capapresentacion\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\controllers\\mantenedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|d:\\programacion\\tp final\\vldrink\\capapresentacion\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|d:\\programacion\\tp final\\vldrink\\capapresentacion\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capadatos\\cd_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\cd_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B28951C-79C1-4727-8CD5-E8C1681E4CD6}|CapaEntidad\\CapaEntidad.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capaentidad\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B28951C-79C1-4727-8CD5-E8C1681E4CD6}|CapaEntidad\\CapaEntidad.csproj|solutionrelative:capaentidad\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B28951C-79C1-4727-8CD5-E8C1681E4CD6}|CapaEntidad\\CapaEntidad.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capaentidad\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B28951C-79C1-4727-8CD5-E8C1681E4CD6}|CapaEntidad\\CapaEntidad.csproj|solutionrelative:capaentidad\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\web.debug.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\web.debug.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capadatos\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\scripts\\datatables.bootstrap5.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\scripts\\datatables.bootstrap5.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\scripts\\gestionusuarios.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\scripts\\gestionusuarios.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Fabrizio\\AppData\\Local\\Temp\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32E01B3D-D7C8-4920-A5F5-4C0EA307E934}|CapaNegocio\\CapaNegocio.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capanegocio\\cn_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32E01B3D-D7C8-4920-A5F5-4C0EA307E934}|CapaNegocio\\CapaNegocio.csproj|solutionrelative:capanegocio\\cn_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\web.release.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\web.release.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DA60D78-296A-4C42-B6BE-E31888C06251}|..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\VLDRINKS.CORE.csproj|d:\\programacion\\vldrinks\\trabajopracticop2\\vldrink\\vldrinks.core\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\controllers\\mantenedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\mantenedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,8 +80,16 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 13,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -37,53 +99,233 @@
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T00:03:05.644Z"
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAGUAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-30T23:47:21.413Z"
+              "DocumentIndex": 4,
+              "Title": "CD_Usuarios.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaDatos\\CD_Usuarios.cs",
+              "RelativeDocumentMoniker": "CapaDatos\\CD_Usuarios.cs",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaDatos\\CD_Usuarios.cs",
+              "RelativeToolTip": "CapaDatos\\CD_Usuarios.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAIwBgAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T03:10:06.706Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Conexion.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaDatos\\Conexion.cs",
+              "RelativeDocumentMoniker": "CapaDatos\\Conexion.cs",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaDatos\\Conexion.cs",
+              "RelativeToolTip": "CapaDatos\\Conexion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T03:09:50.747Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "gestionUsuarios.js",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Scripts\\gestionUsuarios.js",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Scripts\\gestionUsuarios.js",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Scripts\\gestionUsuarios.js",
+              "RelativeToolTip": "CAPAPRESENTACION\\Scripts\\gestionUsuarios.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-10-31T20:01:35.188Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "MantenedorController.cs",
-              "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
-              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
-              "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
-              "RelativeToolTip": "CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Usuarios.cshtml",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
+              "RelativeToolTip": "CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-30T23:28:10.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "dataTables.bootstrap5.min.js",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Scripts\\dataTables.bootstrap5.min.js",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Scripts\\dataTables.bootstrap5.min.js",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Scripts\\dataTables.bootstrap5.min.js",
+              "RelativeToolTip": "CAPAPRESENTACION\\Scripts\\dataTables.bootstrap5.min.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAABsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-01T01:43:25.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBsAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-30T23:36:56.973Z"
+              "WhenOpened": "2025-10-31T00:03:05.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Web.Debug.config",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Web.Debug.config",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Web.Debug.config",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Web.Debug.config",
+              "RelativeToolTip": "CAPAPRESENTACION\\Web.Debug.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-10-31T19:38:31.93Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Usuarios.cshtml",
-              "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
-              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
-              "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
-              "RelativeToolTip": "CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAADQAAAAhAAAAAAAAAA==",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-30T23:28:10.299Z",
+              "WhenOpened": "2025-10-30T23:47:21.413Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Web.config",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Web.config",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Web.config",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Web.config",
+              "RelativeToolTip": "CAPAPRESENTACION\\Web.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-10-31T03:11:49.978Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Home\\Login.cshtml",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Home\\Login.cshtml",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Home\\Login.cshtml",
+              "RelativeToolTip": "CAPAPRESENTACION\\Views\\Home\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-01T02:43:12.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaEntidad\\Usuario.cs",
+              "RelativeDocumentMoniker": "CapaEntidad\\Usuario.cs",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaEntidad\\Usuario.cs",
+              "RelativeToolTip": "CapaEntidad\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T17:56:27.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UsuarioDTO.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaEntidad\\UsuarioDTO.cs",
+              "RelativeDocumentMoniker": "CapaEntidad\\UsuarioDTO.cs",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaEntidad\\UsuarioDTO.cs",
+              "RelativeToolTip": "CapaEntidad\\UsuarioDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T02:02:23.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CN_Usuarios.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaNegocio\\CN_Usuarios.cs",
+              "RelativeDocumentMoniker": "CapaNegocio\\CN_Usuarios.cs",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaNegocio\\CN_Usuarios.cs",
+              "RelativeToolTip": "CapaNegocio\\CN_Usuarios.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T19:38:15.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Web.Release.config",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Web.Release.config",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Web.Release.config",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Web.Release.config",
+              "RelativeToolTip": "CAPAPRESENTACION\\Web.Release.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-10-31T19:38:30.507Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "BundleConfig.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\App_Start\\BundleConfig.cs",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\App_Start\\BundleConfig.cs",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\App_Start\\BundleConfig.cs",
+              "RelativeToolTip": "CAPAPRESENTACION\\App_Start\\BundleConfig.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAADwvyUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T01:18:41.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "PasswordHasher.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
+              "RelativeDocumentMoniker": "..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
+              "ToolTip": "D:\\PROGRAMACION\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
+              "RelativeToolTip": "..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T18:23:57.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\Fabrizio\\AppData\\Local\\Temp\\readme.txt",
+              "ToolTip": "C:\\Users\\Fabrizio\\AppData\\Local\\Temp\\readme.txt",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-10-31T19:42:14.162Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "MantenedorController.cs",
+              "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
+              "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
+              "RelativeToolTip": "CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T23:36:56.973Z"
             }
           ]
         }

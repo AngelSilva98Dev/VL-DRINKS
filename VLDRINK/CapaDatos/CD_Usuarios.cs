@@ -19,7 +19,7 @@ namespace CapaDatos
             {
                 using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
                 {
-                    string consulta = "select IdUsuario, Nombres, Apellidos, Correo, Clave, Activo, Reestablecer from USUARIO";
+                    string consulta = "select IdUsuario, Nombres, Apellidos, Correo, Reestablecer, Activo from USUARIO";
 
                     SqlCommand comando = new SqlCommand(consulta, objConexion);
                     comando.CommandType = CommandType.Text;
@@ -36,10 +36,8 @@ namespace CapaDatos
                                 Nombres = lector["Nombres"].ToString(),
                                 Apellidos = lector["Apellidos"].ToString(),
                                 Correo = lector["Correo"].ToString(),
-                                Clave = lector["Clave"].ToString(),
+                                Reestablecer = Convert.ToBoolean(lector["Reestablecer"]),
                                 Activo = Convert.ToBoolean(lector["Activo"]),
-                                Reestablecer = Convert.ToBoolean(lector["Reestablecer"])
-
                             });
                         }
                     }

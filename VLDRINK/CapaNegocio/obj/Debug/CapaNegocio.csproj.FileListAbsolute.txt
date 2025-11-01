@@ -9,3 +9,16 @@ C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaNegocio\obj\De
 C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaNegocio\obj\Debug\CapaNego.81B9D119.Up2Date
 C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaNegocio\obj\Debug\CapaNegocio.dll
 C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaNegocio\obj\Debug\CapaNegocio.pdb
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\CapaNegocio.dll
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\CapaNegocio.pdb
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\CapaDatos.dll
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\CapaEntidad.dll
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\VLDRINKS.CORE.dll
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\VLDRINKS.CORE.pdb
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\CapaDatos.pdb
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\CapaEntidad.pdb
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\obj\Debug\CapaNegocio.csproj.AssemblyReference.cache
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\obj\Debug\CapaNegocio.csproj.CoreCompileInputs.cache
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\obj\Debug\CapaNego.81B9D119.Up2Date
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\obj\Debug\CapaNegocio.dll
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\obj\Debug\CapaNegocio.pdb
