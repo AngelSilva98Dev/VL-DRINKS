@@ -3,7 +3,11 @@
   "WorkspaceRootPath": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|d:\\programacion\\tp final\\vldrink\\capapresentacion\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\web.debug.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\web.debug.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -19,15 +23,8 @@
       "RelativeMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\cd_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8DA60D78-296A-4C42-B6BE-E31888C06251}|..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\VLDRINKS.CORE.csproj|d:\\programacion\\vldrinks\\trabajopracticop2\\vldrink\\vldrinks.core\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\web.debug.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\web.debug.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -84,7 +81,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -112,7 +109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "Web.Debug.config",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Web.Debug.config",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Web.Debug.config",
@@ -120,11 +117,12 @@
               "RelativeToolTip": "CAPAPRESENTACION\\Web.Debug.config",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-10-31T19:38:31.93Z"
+              "WhenOpened": "2025-10-31T19:38:31.93Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
@@ -136,7 +134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "Web.config",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Web.config",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Web.config",
@@ -149,7 +147,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "Conexion.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaDatos\\Conexion.cs",
               "RelativeDocumentMoniker": "CapaDatos\\Conexion.cs",
@@ -161,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "CD_Usuarios.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaDatos\\CD_Usuarios.cs",
               "RelativeDocumentMoniker": "CapaDatos\\CD_Usuarios.cs",
@@ -173,19 +171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PasswordHasher.cs",
-              "DocumentMoniker": "D:\\PROGRAMACION\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
-              "RelativeDocumentMoniker": "..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
-              "ToolTip": "D:\\PROGRAMACION\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
-              "RelativeToolTip": "..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T18:23:57.991Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CN_Usuarios.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaNegocio\\CN_Usuarios.cs",
               "RelativeDocumentMoniker": "CapaNegocio\\CN_Usuarios.cs",
@@ -197,16 +183,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AccountController.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\AccountController.cs",
               "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\AccountController.cs",
               "RelativeToolTip": "CAPAPRESENTACION\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAowD8AAABAAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowEYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-01T03:17:04.443Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-01T03:17:04.443Z"
             },
             {
               "$type": "Document",
@@ -222,7 +207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MantenedorController.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
@@ -234,7 +219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "HomeController.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
@@ -246,7 +231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "Usuarios.cshtml",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
@@ -258,7 +243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "dataTables.bootstrap5.min.js",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Scripts\\dataTables.bootstrap5.min.js",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Scripts\\dataTables.bootstrap5.min.js",
@@ -270,7 +255,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "gestionUsuarios.js",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Scripts\\gestionUsuarios.js",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Scripts\\gestionUsuarios.js",
@@ -282,7 +267,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "Usuario.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaEntidad\\Usuario.cs",
               "RelativeDocumentMoniker": "CapaEntidad\\Usuario.cs",
@@ -294,7 +279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "UsuarioDTO.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaEntidad\\UsuarioDTO.cs",
               "RelativeDocumentMoniker": "CapaEntidad\\UsuarioDTO.cs",
@@ -306,7 +291,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "Web.Release.config",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Web.Release.config",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Web.Release.config",
@@ -318,7 +303,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "BundleConfig.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\App_Start\\BundleConfig.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\App_Start\\BundleConfig.cs",
@@ -330,7 +315,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "readme.txt",
               "DocumentMoniker": "C:\\Users\\Fabrizio\\AppData\\Local\\Temp\\readme.txt",
               "ToolTip": "C:\\Users\\Fabrizio\\AppData\\Local\\Temp\\readme.txt",
