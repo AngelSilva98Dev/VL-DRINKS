@@ -1,9 +1,3 @@
-C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaEntidad\bin\Debug\CapaEntidad.dll
-C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaEntidad\bin\Debug\CapaEntidad.pdb
-C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaEntidad\obj\Debug\CapaEntidad.csproj.AssemblyReference.cache
-C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaEntidad\obj\Debug\CapaEntidad.csproj.CoreCompileInputs.cache
-C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaEntidad\obj\Debug\CapaEntidad.dll
-C:\Users\Nahuel\OneDrive\Escritorio\TrabajoPracticoP2\VLDRINK\CapaEntidad\obj\Debug\CapaEntidad.pdb
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\bin\Debug\CapaEntidad.dll
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\bin\Debug\CapaEntidad.pdb
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\bin\Debug\System.ComponentModel.Annotations.dll
