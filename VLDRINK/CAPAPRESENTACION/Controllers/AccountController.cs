@@ -1,24 +1,25 @@
 ﻿using CapaEntidad;
 using CapaNegocio;
 using System;
-using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 
 namespace CAPAPRESENTACION.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         // Metodo para ir a la view de Login
         [HttpGet]
         public ActionResult Login()
         {
-            return View(); 
+            return View();
         }
 
         // Autenticacion de Usuario
         [HttpPost]
-        [ValidateAntiForgeryToken] // <-- Verifica el token de seguridad
+        [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
         {
             string mensajeError;
@@ -33,7 +34,6 @@ namespace CAPAPRESENTACION.Controllers
                 ViewBag.Error = mensajeError; // "Credenciales inválidas."
                 return View(); // Devuelve la vista Login, pero con el mensaje de error
             }
-
 
             //  Creamos la "cookie" de autenticación
             FormsAuthentication.SetAuthCookie(usuario.Correo, false);
@@ -51,22 +51,11 @@ namespace CAPAPRESENTACION.Controllers
         [HttpGet]
         public ActionResult LogOut()
         {
-            FormsAuthentication.SignOut(); // <-- Borra la cookie de autenticación
-            Session.Clear(); // Limpia la sesión
+            FormsAuthentication.SignOut(); 
+            Session.Clear(); 
             return RedirectToAction("Index", "Home");
         }
 
-
-        [HttpGet]
-        public ActionResult TestearVerificacion()
-        {
-            // 1. Llama a la capa de negocio
-            CN_Usuarios objNegocio = new CN_Usuarios();
-            string resultado = objNegocio.TestearVerificacion();
-
-            // 2. Devuelve el resultado como texto simple
-            return Content(resultado, "text/plain");
-        }
 
         [HttpGet]
         public ActionResult Registrar()
@@ -81,27 +70,27 @@ namespace CAPAPRESENTACION.Controllers
             string mensajeError = string.Empty;
             CN_Usuarios objNegocio = new CN_Usuarios();
 
-            // Usamos el campo PasswordHash temporalmente para pasar la contraseña
-            // en texto plano a la capa de negocio.
+
             Usuario nuevoUsuario = new Usuario()
             {
                 Nombres = nombres,
                 Apellidos = apellidos,
                 Correo = email,
-                PasswordHash = password.Select(c => (byte)c).ToArray() // "Truco" para pasar el string
+
+                PasswordHash = Encoding.UTF8.GetBytes(password)
             };
 
-            // Llamamos a la capa de negocio
+
             int idGenerado = objNegocio.Registrar(nuevoUsuario, out mensajeError);
 
             if (idGenerado > 0)
             {
-                // ¡Éxito! Redirigimos al Login para que inicie sesión
+
                 return RedirectToAction("Login");
             }
             else
             {
-                // Falló. Mostramos el error
+               
                 ViewBag.Error = mensajeError;
                 return View();
             }

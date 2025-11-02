@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace CAPAPRESENTACION.Controllers
 {
-    public class MantenedorController : Controller
+    [Authorize]
+    public class MantenedorController : BaseController
     {
-        // GET: Mantenedor
         public ActionResult Categoria()
         {
             return View();

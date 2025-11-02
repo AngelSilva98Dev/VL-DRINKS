@@ -21,7 +21,7 @@ namespace CapaEntidad
 
         public bool Activo { get; set; }
 
-        [MaxLength(64)]
+        [MaxLength(20)]
         public byte[] PasswordHash { get; set; }
 
         [MaxLength(32)]
