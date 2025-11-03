@@ -18,7 +18,7 @@
     <div class=" card-body">
         <div class="row">
             <div class="col-sm-12">
-                <button type="button" class="btn btn-success">Crear Nuevo</button>
+                <button type="button" class="btn btn-success" id="btnNuevoUsuario">Crear Nuevo</button>
             </div>
         </div>
 
@@ -30,7 +30,9 @@
                     <th>Apellidos</th>
                     <th>Correo</th>
                     <th>Activo</th>
+                    <th></th>
                 </tr>
+
             </thead>
             <tbody>
             </tbody>
@@ -39,37 +41,184 @@
     </div>
 </div>
 
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitulo">Nuevo Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formUsuario">
+
+                    <input type="hidden" id="txtIdUsuario" value="0">
+
+
+                    <div class="mb-3">
+                        <label for="txtNombres" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="txtNombres" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtApellidos" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" id="txtApellidos" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtCorreo" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="txtCorreo" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="chkActivo" checked>
+                        <label class="form-check-label" for="chkActivo">Activo</label>
+                    </div>
+                    <div id="modalErrorMsg" class="alert alert-danger d-none" role="alert"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @section scripts{
     <script>
         $(document).ready(function () {
 
-            $('#tabla').DataTable({
+            var modal;
+            var modalElement = document.getElementById('FormModal');
+            if(modalElement) {
+                modal = new bootstrap.Modal(modalElement);
+            }
+
+            var tabla = $('#tabla').DataTable({
                 "ajax": {
                     "url": "@Url.Action("ListarUsuarios", "Home")",
                     "type": "GET",
                     "dataType": "json"
-
                 },
                 "columns": [
+                    { "data": "IdUsuario", "visible": false },
                     { "data": "Nombres" },
                     { "data": "Apellidos" },
                     { "data": "Correo" },
                     {
                         "data": "Activo",
                         "render": function (data) {
-                            if (data) {
-                                return '<span class="badge bg-success">Activo</span>';
-                            } else {
-                                return '<span class="badge bg-danger">Inactivo</span>';
-                            }
+                            return data ? '<span class="badge bg-success">Activo</span>' : '<span class="badge bg-danger">Inactivo</span>';
                         }
+                    },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            var btnEditar = '<button type="button" class="btn btn-primary btn-sm btn-editar" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                            var btnEliminar = '<button type="button" class="btn btn-danger btn-sm btn-eliminar" title="Eliminar"><i class="fas fa-trash"></i></button>';
+                            return btnEditar + " " + btnEliminar;
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "90px"
                     }
                 ]
             });
 
+            $("#btnNuevoUsuario").on("click", function () {
+                $("#formUsuario")[0].reset();
+                $("#txtIdUsuario").val("0");
+                $("#chkActivo").prop("checked", true);
+                $("#modalErrorMsg").addClass("d-none");
+                $("#modalTitulo").text("Nuevo Usuario");
+                if(modal) modal.show();
+            });
+
+            $('#tabla tbody').on('click', '.btn-editar', function () {
+                var fila = $(this).closest('tr');
+                var data = tabla.row(fila).data();
+
+                if (data) {
+                    var IdUsuario = data.IdUsuario || data.IdUsuario;
+
+                    $("#txtIdUsuario").val(IdUsuario);
+                    $("#txtNombres").val(data.Nombres);
+                    $("#txtApellidos").val(data.Apellidos);
+                    $("#txtCorreo").val(data.Correo);
+                    $("#chkActivo").prop("checked", data.Activo);
+
+                    $("#modalErrorMsg").addClass("d-none");
+                    $("#modalTitulo").text("Modificar Usuario");
+                    if(modal) modal.show();
+                }
+            });
+
+            $("#btnGuardar").on("click", function () {
+                var usuario = {
+                    IdUsuario: $("#txtIdUsuario").val(),
+                    Nombres: $("#txtNombres").val(),
+                    Apellidos: $("#txtApellidos").val(),
+                    Correo: $("#txtCorreo").val(),
+                    Activo: $("#chkActivo").is(":checked")
+                };
+
+                var esNuevo = (usuario.IdUsuario == "0");
+                var url = esNuevo ? '@Url.Action("GuardarUsuario", "Home")' : '@Url.Action("ModificarUsuario", "Home")';
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: usuario,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.operacionExitosa) {
+                            modal.hide();
+                            tabla.ajax.reload();
+                            var titulo = esNuevo ? '¡Usuario Creado!' : '¡Usuario Modificado!';
+                            var texto = esNuevo ? 'El usuario ha sido creado con la contraseña "contraseña".' : 'Los datos del usuario han sido actualizados.';
+                            Swal.fire(titulo, texto, 'success');
+                        } else {
+                            $("#modalErrorMsg").text(response.mensaje);
+                            $("#modalErrorMsg").removeClass("d-none");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        $("#modalErrorMsg").text("Error inesperado al guardar: " + status);
+                        $("#modalErrorMsg").removeClass("d-none");
+                    }
+                });
+            });
+
+            $('#tabla tbody').on('click', '.btn-eliminar', function () {
+                var fila = $(this).closest('tr');
+                var data = tabla.row(fila).data();
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: `¿Deseas eliminar al usuario ${data.Nombres} ${data.Apellidos}?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '@Url.Action("EliminarUsuario", "Home")',
+                            type: "POST",
+                            data: { IdUsuario: (data.IdUsuario || data.IdUsuario) },
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.operacionExitosa) {
+                                    tabla.ajax.reload();
+                                    Swal.fire('¡Eliminado!', 'El usuario ha sido eliminado.', 'success');
+                                } else {
+                                    Swal.fire('Error', response.mensaje, 'error');
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
         });
     </script>
-
-
 }
-

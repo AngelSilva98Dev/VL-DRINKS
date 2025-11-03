@@ -41,5 +41,54 @@ namespace CAPAPRESENTACION.Controllers
 
             return Json(new { data = listaParaElCliente }, JsonRequestBehavior.AllowGet);
         }
+
+
+        //Crear Administradores
+
+        [HttpPost]
+        public JsonResult GuardarUsuario(string Nombres, string Apellidos, string Correo, bool Activo)
+        {
+            string mensaje = string.Empty;
+            int idGenerado = 0;
+
+            Usuario objeto = new Usuario()
+            {
+                Nombres = Nombres,
+                Apellidos = Apellidos,
+                Correo = Correo,
+                Activo = Activo
+            };
+
+            CN_Usuarios objNegocio = new CN_Usuarios();
+
+            idGenerado = objNegocio.RegistrarAdmin(objeto, out mensaje);
+
+            return Json(new { operacionExitosa = (idGenerado > 0), mensaje = mensaje });
+        }
+
+        [HttpPost]
+        public JsonResult ModificarUsuario(Usuario objeto)
+        {
+            string mensaje = string.Empty;
+            bool resultado = false;
+
+            CN_Usuarios objNegocio = new CN_Usuarios();
+            resultado = objNegocio.Modificar(objeto, out mensaje);
+
+            return Json(new { operacionExitosa = resultado, mensaje = mensaje });
+        }
+
+
+        [HttpPost]
+        public JsonResult EliminarUsuario(int idUsuario)
+        {
+            string mensaje = string.Empty;
+            bool resultado = false;
+
+            CN_Usuarios objNegocio = new CN_Usuarios();
+            resultado = objNegocio.Eliminar(idUsuario, out mensaje);
+
+            return Json(new { operacionExitosa = resultado, mensaje = mensaje });
+        }
     }
 }

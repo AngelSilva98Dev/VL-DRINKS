@@ -7,10 +7,11 @@ using System.Web.Security;
 
 namespace CAPAPRESENTACION.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class AccountController : Controller
     {
         // Metodo para ir a la view de Login
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Login()
         {
@@ -18,6 +19,7 @@ namespace CAPAPRESENTACION.Controllers
         }
 
         // Autenticacion de Usuario
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
@@ -25,36 +27,36 @@ namespace CAPAPRESENTACION.Controllers
             string mensajeError;
             CN_Usuarios objNegocio = new CN_Usuarios();
 
-            //  Llama a la Capa de Negocio para validar
             Usuario usuario = objNegocio.ValidarUsuario(email, password, out mensajeError);
 
-            //  Si el usuario es NULO, hubo un error
             if (usuario == null)
             {
-                ViewBag.Error = mensajeError; // "Credenciales inválidas."
-                return View(); // Devuelve la vista Login, pero con el mensaje de error
+                ViewBag.Error = mensajeError; 
+                return View(); 
             }
 
-            //  Creamos la "cookie" de autenticación
             FormsAuthentication.SetAuthCookie(usuario.Correo, false);
 
-            // (Opcional) Puedes guardar datos del usuario en la Sesión
             Session["UserCorreo"] = usuario.Correo;
             Session["UserNombre"] = usuario.Nombres;
 
-            // Redirigimos al Inicio
             return RedirectToAction("Index", "Home");
         }
 
 
-        // Metodo cerrar sesion
+
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut(); 
-            Session.Clear(); 
-            return RedirectToAction("Index", "Home");
+            Session.Clear();
+
+            TempData["Notification"] = "Se cerró la sesión correctamente.";
+
+            return RedirectToAction("Login", "Account");
         }
+
 
 
         [HttpGet]
@@ -62,6 +64,7 @@ namespace CAPAPRESENTACION.Controllers
         {
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

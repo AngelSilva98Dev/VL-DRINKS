@@ -103,7 +103,7 @@ namespace CapaDatos
             return usuario;
         }
 
-    
+
 
         public int Registrar(Usuario obj, out string Mensaje)
         {
@@ -114,46 +114,106 @@ namespace CapaDatos
             {
                 using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
                 {
-                    // Usamos un Stored Procedure (SP) o un comando SQL directo.
-                    // Es más seguro usar un SP, pero para este ejemplo,
-                    // un comando parametrizado es suficiente.
 
-                    // Esta consulta inserta el usuario y DEVUELVE el ID nuevo
                     string consulta = "INSERT INTO USUARIO(Nombres, Apellidos, Correo, Activo, Reestablecer, PasswordHash, PasswordSalt) " +
                                       "VALUES(@Nombres, @Apellidos, @Correo, @Activo, @Reestablecer, @PasswordHash, @PasswordSalt);" +
-                                      "SELECT SCOPE_IDENTITY();"; // Devuelve el último ID insertado
+                                      "SELECT SCOPE_IDENTITY();"; 
 
                     SqlCommand comando = new SqlCommand(consulta, objConexion);
 
-                    // Pasamos los parámetros de forma segura
+                    
                     comando.Parameters.AddWithValue("@Nombres", obj.Nombres);
                     comando.Parameters.AddWithValue("@Apellidos", obj.Apellidos);
                     comando.Parameters.AddWithValue("@Correo", obj.Correo);
                     comando.Parameters.AddWithValue("@Activo", obj.Activo);
                     comando.Parameters.AddWithValue("@Reestablecer", obj.Reestablecer);
 
-                    // Pasamos los byte[]
+                 
                     comando.Parameters.AddWithValue("@PasswordHash", obj.PasswordHash);
                     comando.Parameters.AddWithValue("@PasswordSalt", obj.PasswordSalt);
 
-                    // Le decimos a C# que esperamos un solo valor de vuelta (el ID)
                     comando.CommandType = CommandType.Text;
 
                     objConexion.Open();
 
-                    // ExecuteScalar se usa para obtener el primer valor (el ID)
+
                     idUsuarioGenerado = Convert.ToInt32(comando.ExecuteScalar());
                 }
             }
             catch (Exception ex)
             {
                 idUsuarioGenerado = 0;
-                Mensaje = ex.Message; // Capturamos el error real
+                Mensaje = ex.Message; 
             }
 
             return idUsuarioGenerado;
         }
 
-    }
+ 
 
+
+public bool Modificar(Usuario obj, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
+                {
+
+                    string consulta = "UPDATE USUARIO SET " +
+                                      "Nombres = @Nombres, " +
+                                      "Apellidos = @Apellidos, " +
+                                      "Correo = @Correo, " +
+                                      "Activo = @Activo " +
+                                      "WHERE IdUsuario = @IdUsuario";
+
+                    SqlCommand comando = new SqlCommand(consulta, objConexion);
+                    comando.Parameters.AddWithValue("@IdUsuario", obj.IdUsuario);
+                    comando.Parameters.AddWithValue("@Nombres", obj.Nombres);
+                    comando.Parameters.AddWithValue("@Apellidos", obj.Apellidos);
+                    comando.Parameters.AddWithValue("@Correo", obj.Correo);
+                    comando.Parameters.AddWithValue("@Activo", obj.Activo);
+                    comando.CommandType = CommandType.Text;
+
+                    objConexion.Open();
+
+                    resultado = comando.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Mensaje = ex.Message;
+                resultado = false;
+            }
+            return resultado;
+        }
+
+        public bool Eliminar(int id, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
+                {
+                    string consulta = "DELETE FROM USUARIO WHERE IdUsuario = @IdUsuario";
+
+                    SqlCommand comando = new SqlCommand(consulta, objConexion);
+                    comando.Parameters.AddWithValue("@IdUsuario", id);
+                    comando.CommandType = CommandType.Text;
+
+                    objConexion.Open();
+
+                    resultado = comando.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Mensaje = ex.Message;
+                resultado = false;
+            }
+            return resultado;
+        }
+    }
 }

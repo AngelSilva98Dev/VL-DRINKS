@@ -21,9 +21,9 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-                    @if (Session["UserCorreo"] != null)
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a class="dropdown-item disabled" href="#">@(Session["UserCorreo"].ToString())</a></li>
+                        <li><a class="dropdown-item disabled" href="#">@User.Identity.Name</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="@Url.Action("LogOut", "Account")">Cerrar Sesión</a></li>
                     }
@@ -107,6 +107,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/datatables")
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @RenderSection("scripts", required: false)
 </body>
