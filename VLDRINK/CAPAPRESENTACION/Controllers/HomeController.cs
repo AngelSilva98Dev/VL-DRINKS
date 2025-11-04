@@ -27,5 +27,24 @@ namespace CAPAPRESENTACION.Controllers
             listaUsuario = new CN_Usuarios().Listar();
             return Json(new { data = listaUsuario },JsonRequestBehavior.AllowGet);
         }
+
+
+        [HttpPost]
+        public JsonResult GuardarUsuario(Usuario objUsuario)
+        {
+            object resultado;
+            string mensaje = string.Empty;
+            if(objUsuario.IdUsuario == 0)
+            {
+                resultado = new CN_Usuarios().Registrar(objUsuario, out mensaje);
+            }
+            else
+            {
+                resultado = new CN_Usuarios().Editar(objUsuario, out mensaje);
+            }
+
+            return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

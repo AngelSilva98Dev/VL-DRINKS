@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|c:\\users\\nahuel\\onedrive\\escritorio\\trabajopracticop2\\vldrink\\capapresentacion\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32E01B3D-D7C8-4920-A5F5-4C0EA307E934}|CapaNegocio\\CapaNegocio.csproj|c:\\users\\nahuel\\onedrive\\escritorio\\trabajopracticop2\\vldrink\\capanegocio\\cn_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32E01B3D-D7C8-4920-A5F5-4C0EA307E934}|CapaNegocio\\CapaNegocio.csproj|solutionrelative:capanegocio\\cn_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32E01B3D-D7C8-4920-A5F5-4C0EA307E934}|CapaNegocio\\CapaNegocio.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capanegocio\\cn_recursos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32E01B3D-D7C8-4920-A5F5-4C0EA307E934}|CapaNegocio\\CapaNegocio.csproj|solutionrelative:capanegocio\\cn_recursos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capadatos\\cd_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\cd_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\controllers\\mantenedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,19 +50,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAABSAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "CN_Recursos.cs",
+              "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CapaNegocio\\CN_Recursos.cs",
+              "RelativeDocumentMoniker": "CapaNegocio\\CN_Recursos.cs",
+              "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CapaNegocio\\CN_Recursos.cs",
+              "RelativeToolTip": "CapaNegocio\\CN_Recursos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T00:03:05.644Z"
+              "WhenOpened": "2025-11-03T04:13:20.167Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "CN_Usuarios.cs",
+              "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CapaNegocio\\CN_Usuarios.cs",
+              "RelativeDocumentMoniker": "CapaNegocio\\CN_Usuarios.cs",
+              "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CapaNegocio\\CN_Usuarios.cs",
+              "RelativeToolTip": "CapaNegocio\\CN_Usuarios.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACUAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T03:54:20.541Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CD_Usuarios.cs",
+              "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CapaDatos\\CD_Usuarios.cs",
+              "RelativeDocumentMoniker": "CapaDatos\\CD_Usuarios.cs",
+              "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CapaDatos\\CD_Usuarios.cs",
+              "RelativeToolTip": "CapaDatos\\CD_Usuarios.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAUwJAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T02:55:18.218Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
@@ -62,7 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "MantenedorController.cs",
               "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
@@ -80,9 +119,22 @@
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
               "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
               "RelativeToolTip": "CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
-              "ViewState": "AgIAADoAAAAAAAAAAAAuwF8AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAF8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-30T23:28:10.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Nahuel\\OneDrive\\Escritorio\\TrabajoPracticoP2\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwCgAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T00:03:05.644Z",
               "EditorCaption": ""
             }
           ]
