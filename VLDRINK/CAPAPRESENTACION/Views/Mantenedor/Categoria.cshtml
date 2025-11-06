@@ -1,8 +1,214 @@
-﻿
-@{
-    ViewBag.Title = "Categoria";
+﻿@{
+    ViewBag.Title = "Categorías";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Categoria</h2>
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Resumen</a></li>
+    <li class="breadcrumb-item active">Categorías</li>
+</ol>
 
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-tags me-1"></i> Lista de Categorías
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-success" id="btnNuevaCategoria">Crear Nueva</button>
+            </div>
+        </div>
+
+        <hr />
+
+        <table id="tablaCategoria" class="display cell-border" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Activo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="modal fade" id="FormModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitulo">Nueva Categoría</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formCategoria">
+                    <input type="hidden" id="txtIdCategoria" value="0">
+
+                    <div class="mb-3">
+                        <label for="txtDescripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="txtDescripcion" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="chkActivo" checked>
+                        <label class="form-check-label" for="chkActivo">Activo</label>
+                    </div>
+
+                    <div id="modalErrorMsg" class="alert alert-danger d-none" role="alert"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            var modal;
+            var modalElement = document.getElementById('FormModal');
+            if(modalElement) {
+                modal = new bootstrap.Modal(modalElement);
+            }
+
+            // 1. Configuración de DataTables
+            var tabla = $('#tablaCategoria').DataTable({
+                "ajax": {
+                    // Apunta al nuevo controlador
+                    "url": "@Url.Action("ListarCategorias", "Mantenedor")",
+                    "type": "GET",
+                    "dataType": "json"
+                },
+                "columns": [
+                    // Ocultamos el ID
+                    { "data": "IdCategoria", "visible": false },
+                    // Mostramos la Descripción
+                    { "data": "Descripcion" },
+                    // Reutilizamos la lógica de 'Activo'
+                    {
+                        "data": "Activo",
+                        "render": function (data) {
+                            return data ? '<span class="badge bg-success">Activo</span>' : '<span class="badge bg-danger">Inactivo</span>';
+                        }
+                    },
+                    // Reutilizamos la lógica de botones
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            var btnEditar = '<button type="button" class="btn btn-primary btn-sm btn-editar" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                            var btnEliminar = '<button type="button" class="btn btn-danger btn-sm btn-eliminar" title="Eliminar"><i class="fas fa-trash"></i></button>';
+                            return btnEditar + " " + btnEliminar;
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "90px"
+                    }
+                ]
+            });
+
+            // 2. Evento: "Crear Nuevo"
+            $("#btnNuevaCategoria").on("click", function () {
+                $("#formCategoria")[0].reset();
+                $("#txtIdCategoria").val("0");
+                $("#chkActivo").prop("checked", true);
+                $("#modalErrorMsg").addClass("d-none");
+                $("#modalTitulo").text("Nueva Categoría");
+                if(modal) modal.show();
+            });
+
+            // 3. Evento: Clic en "Editar" (lápiz)
+            $('#tablaCategoria tbody').on('click', '.btn-editar', function () {
+                var fila = $(this).closest('tr');
+                var data = tabla.row(fila).data();
+
+                if (data) {
+                    // Llenamos el modal con los datos de la Categoría
+                    $("#txtIdCategoria").val(data.IdCategoria);
+                    $("#txtDescripcion").val(data.Descripcion);
+                    $("#chkActivo").prop("checked", data.Activo);
+
+                    $("#modalErrorMsg").addClass("d-none");
+                    $("#modalTitulo").text("Modificar Categoría");
+                    if(modal) modal.show();
+                }
+            });
+
+            // 4. Evento: Clic en "Guardar"
+            $("#btnGuardar").on("click", function () {
+                // Creamos el objeto 'categoria'
+                var categoria = {
+                    IdCategoria: $("#txtIdCategoria").val(),
+                    Descripcion: $("#txtDescripcion").val(),
+                    Activo: $("#chkActivo").is(":checked")
+                };
+
+                var esNuevo = (categoria.IdCategoria == "0");
+                // Apuntamos a los nuevos endpoints
+                var url = esNuevo ? '@Url.Action("GuardarCategoria", "Mantenedor")' : '@Url.Action("ModificarCategoria", "Mantenedor")';
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: categoria,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.operacionExitosa) {
+                            modal.hide();
+                            tabla.ajax.reload();
+                            var titulo = esNuevo ? '¡Categoría Creada!' : '¡Categoría Modificada!';
+                            Swal.fire(titulo, response.mensaje, 'success');
+                        } else {
+                            $("#modalErrorMsg").text(response.mensaje);
+                            $("#modalErrorMsg").removeClass("d-none");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        $("#modalErrorMsg").text("Error inesperado al guardar: " + status);
+                        $("#modalErrorMsg").removeClass("d-none");
+                    }
+                });
+            });
+
+            // 5. Evento: Clic en "Eliminar" (basura)
+            $('#tablaCategoria tbody').on('click', '.btn-eliminar', function () {
+                var fila = $(this).closest('tr');
+                var data = tabla.row(fila).data();
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: `¿Deseas eliminar la categoría "${data.Descripcion}"?`, // Mensaje adaptado
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            // Apuntamos al nuevo endpoint
+                            url: '@Url.Action("EliminarCategoria", "Mantenedor")',
+                            type: "POST",
+                            data: { idCategoria: data.IdCategoria },
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.operacionExitosa) {
+                                    tabla.ajax.reload();
+                                    Swal.fire('¡Eliminada!', 'La categoría ha sido eliminada.', 'success');
+                                } else {
+                                    Swal.fire('Error', response.mensaje, 'error');
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+}

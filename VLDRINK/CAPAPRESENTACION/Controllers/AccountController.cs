@@ -10,7 +10,6 @@ namespace CAPAPRESENTACION.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        // Metodo para ir a la view de Login
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Login()
@@ -18,7 +17,6 @@ namespace CAPAPRESENTACION.Controllers
             return View();
         }
 
-        // Autenticacion de Usuario
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
