@@ -67,8 +67,7 @@
 
                     <div class="col-sm-6">
                         <label for="cboactivo" class="form-label">Activo</label>
-                        <select id="cboactivo" class="form-select">
-                            <option selected></option>
+                        <select id="cboactivo" class="form-select">                            
                             <option value="1">Si</option>
                             <option value="0">No</option>                            
                         </select>
@@ -123,13 +122,13 @@
                 },
                 {
                     "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"><i class= "fas fa-pen"></i></button>' +
-                        '<button type="button" class="btn btn-danger btn-sm ms-2"><i class= "fas fa-trash"></i></button>',
+                        '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class= "fas fa-trash"></i></button>',
                     "orderable": false,
                     "searchable": false,
                         "width":"90px"
 
                 }
-                         
+
             ],
             "language": {
                 "url":"//cdn.datatables.net/plug-ins/2.3.4/i18n/es-ES.json"
@@ -169,6 +168,51 @@
             abrirModal(data)
         })
 
+
+        $("#tabla tbody").on("click", '.btn-eliminar', function () {
+
+            var usuarioSeleccionado = $(this).closest("tr");
+
+            var data = tablaDatos.row(usuarioSeleccionado).data();
+
+            swal({
+                title: "Estas seguro?",
+                text: "Esto eliminara al usuario permanentemente",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Si",
+                cancelButtonText: "No",
+                closeOnConfirm: false
+            },
+                function () {
+                    jQuery.ajax({
+                        url: '@Url.Action("EliminarUsuario","Home")',
+                        type: "POST",
+                        data: JSON.stringify({ id: data.IdUsuario }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+
+                            if (data.resultado) {
+                                tablaDatos.row(usuarioSeleccionado).remove().draw();
+                                swal("Eliminado!", "El usuario ha sido removido", "success");
+
+                            } else {
+                                swal("No se pudo eliminar", data.mensaje, "error");
+                            }
+
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                   
+                });
+
+            console.log(data);
+        })
+
         function Guardar() {
 
             var Usuario = {
@@ -179,7 +223,7 @@
                 Nombres: $("#txtnombres").val()
 
             }
-            
+
             jQuery.ajax({
                 url: '@Url.Action("GuardarUsuario","Home")',
                 type: "POST",
@@ -187,7 +231,10 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    
+
+
+                    $(".modal-body").LoadingOverlay("hide");
+
                     if (Usuario.IdUsuario == 0) {
 
                         if (data.resultado != 0) {
@@ -221,15 +268,22 @@
                                 $("#mensajeAlerta").fadeOut();
                             }, 3500);
                         }
-                        
+
 
                     }
                 },
                 error: function (error) {
-                    console.log(error)
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#mensajeAlerta").html('<i class="fa fa-exclamation-triangle me-2" aria-hidden="true"></i>' + "Error ajax");
+                    $("#mensajeAlerta").show();
                 },
                 beforeSend: function () {
-
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
                 }
             });
 
