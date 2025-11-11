@@ -26,5 +26,7 @@ namespace CapaEntidad
 
         [MaxLength(32)]
         public byte[] PasswordSalt { get; set; }
+
+        public bool esAdmin { get; set; }
     }
 }

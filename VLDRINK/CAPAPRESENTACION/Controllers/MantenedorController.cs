@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace CAPAPRESENTACION.Controllers
 {
     [Authorize]
-    public class MantenedorController : BaseController 
+    public class MantenedorController : AdminBaseController
     {
         
         public ActionResult Categoria()

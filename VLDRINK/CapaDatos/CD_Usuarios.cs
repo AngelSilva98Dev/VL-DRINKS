@@ -11,19 +11,32 @@ namespace CapaDatos
 {
     public class CD_Usuarios
     {
-        public List<Usuario> Listar()
+        public List<Usuario> Listar(int idUsuarioLogueado, bool esAdminLogueado)
         {
             List<Usuario> lista = new List<Usuario>();
-
             try
             {
                 using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
                 {
-                    string consulta = "select IdUsuario, Nombres, Apellidos, Correo, Reestablecer, Activo from USUARIO";
+                    // La consulta base
+                    string consulta = "select IdUsuario, Nombres, Apellidos, Correo, Activo, Reestablecer, esAdmin from USUARIO";
+
+                    // --- LÓGICA DE FILTRADO ---
+                    // Si el usuario NO es admin, le añadimos un WHERE
+                    // para que solo pueda ver su propia fila.
+                    if (!esAdminLogueado)
+                    {
+                        consulta += " WHERE IdUsuario = @IdUsuarioLogueado";
+                    }
 
                     SqlCommand comando = new SqlCommand(consulta, objConexion);
-                    comando.CommandType = CommandType.Text;
 
+                    if (!esAdminLogueado)
+                    {
+                        comando.Parameters.AddWithValue("@IdUsuarioLogueado", idUsuarioLogueado);
+                    }
+
+                    comando.CommandType = CommandType.Text;
                     objConexion.Open();
 
                     using (SqlDataReader lector = comando.ExecuteReader())
@@ -36,19 +49,18 @@ namespace CapaDatos
                                 Nombres = lector["Nombres"].ToString(),
                                 Apellidos = lector["Apellidos"].ToString(),
                                 Correo = lector["Correo"].ToString(),
-                                Reestablecer = Convert.ToBoolean(lector["Reestablecer"]),
                                 Activo = Convert.ToBoolean(lector["Activo"]),
+                                Reestablecer = Convert.ToBoolean(lector["Reestablecer"]),
+                                esAdmin = Convert.ToBoolean(lector["esAdmin"])
                             });
                         }
                     }
-
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 lista = new List<Usuario>();
             }
-
             return lista;
         }
 
@@ -60,7 +72,7 @@ namespace CapaDatos
                 using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
                 {
                     // Traemos TODOS los datos, incluido Hash y Salt
-                    string consulta = "SELECT IdUsuario, Nombres, Apellidos, Correo, Reestablecer, Activo, PasswordHash, PasswordSalt FROM USUARIO WHERE Correo = @correo";
+                    string consulta = "SELECT IdUsuario, Nombres, Apellidos, Correo, Reestablecer, Activo, PasswordHash, PasswordSalt, esAdmin FROM USUARIO WHERE Correo = @correo";
 
                     SqlCommand comando = new SqlCommand(consulta, objConexion);
                     comando.Parameters.AddWithValue("@correo", correo);
@@ -80,6 +92,7 @@ namespace CapaDatos
                                 Correo = lector["Correo"].ToString(),
                                 Reestablecer = Convert.ToBoolean(lector["Reestablecer"]),
                                 Activo = Convert.ToBoolean(lector["Activo"]),
+                                esAdmin = Convert.ToBoolean(lector["esAdmin"]),
 
                                 // --- FORMA MÁS SEGURA ---
                                 // Revisa si es nulo antes de convertirlo
@@ -97,13 +110,10 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                // Lanza el error para que podamos verlo
                 throw ex;
             }
             return usuario;
         }
-
-
 
         public int Registrar(Usuario obj, out string Mensaje)
         {
@@ -115,20 +125,18 @@ namespace CapaDatos
                 using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
                 {
 
-                    string consulta = "INSERT INTO USUARIO(Nombres, Apellidos, Correo, Activo, Reestablecer, PasswordHash, PasswordSalt) " +
-                                      "VALUES(@Nombres, @Apellidos, @Correo, @Activo, @Reestablecer, @PasswordHash, @PasswordSalt);" +
-                                      "SELECT SCOPE_IDENTITY();"; 
+                    string consulta = "INSERT INTO USUARIO(Nombres, Apellidos, Correo, Activo, Reestablecer, esAdmin, PasswordHash, PasswordSalt) " +
+                              "VALUES(@Nombres, @Apellidos, @Correo, @Activo, @Reestablecer, @esAdmin, @PasswordHash, @PasswordSalt);" +
+                              "SELECT SCOPE_IDENTITY();";
 
                     SqlCommand comando = new SqlCommand(consulta, objConexion);
 
-                    
                     comando.Parameters.AddWithValue("@Nombres", obj.Nombres);
                     comando.Parameters.AddWithValue("@Apellidos", obj.Apellidos);
                     comando.Parameters.AddWithValue("@Correo", obj.Correo);
                     comando.Parameters.AddWithValue("@Activo", obj.Activo);
                     comando.Parameters.AddWithValue("@Reestablecer", obj.Reestablecer);
-
-                 
+                    comando.Parameters.AddWithValue("@esAdmin", obj.esAdmin); 
                     comando.Parameters.AddWithValue("@PasswordHash", obj.PasswordHash);
                     comando.Parameters.AddWithValue("@PasswordSalt", obj.PasswordSalt);
 
@@ -149,45 +157,44 @@ namespace CapaDatos
             return idUsuarioGenerado;
         }
 
- 
-
-
-public bool Modificar(Usuario obj, out string Mensaje)
-        {
-            bool resultado = false;
-            Mensaje = string.Empty;
-            try
-            {
-                using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
+        public bool Modificar(Usuario obj, out string Mensaje)
                 {
+                    bool resultado = false;
+                    Mensaje = string.Empty;
+                    try
+                    {
+                        using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
+                        {
 
-                    string consulta = "UPDATE USUARIO SET " +
-                                      "Nombres = @Nombres, " +
-                                      "Apellidos = @Apellidos, " +
-                                      "Correo = @Correo, " +
-                                      "Activo = @Activo " +
-                                      "WHERE IdUsuario = @IdUsuario";
+                            string consulta = "UPDATE USUARIO SET " +
+                                              "Nombres = @Nombres, " +
+                                              "Apellidos = @Apellidos, " +
+                                              "Correo = @Correo, " +
+                                              "Activo = @Activo, " +
+                                              "esAdmin = @esAdmin " +
+                                              "WHERE IdUsuario = @IdUsuario";
 
-                    SqlCommand comando = new SqlCommand(consulta, objConexion);
-                    comando.Parameters.AddWithValue("@IdUsuario", obj.IdUsuario);
-                    comando.Parameters.AddWithValue("@Nombres", obj.Nombres);
-                    comando.Parameters.AddWithValue("@Apellidos", obj.Apellidos);
-                    comando.Parameters.AddWithValue("@Correo", obj.Correo);
-                    comando.Parameters.AddWithValue("@Activo", obj.Activo);
-                    comando.CommandType = CommandType.Text;
+                            SqlCommand comando = new SqlCommand(consulta, objConexion);
+                            comando.Parameters.AddWithValue("@IdUsuario", obj.IdUsuario);
+                            comando.Parameters.AddWithValue("@Nombres", obj.Nombres);
+                            comando.Parameters.AddWithValue("@Apellidos", obj.Apellidos);
+                            comando.Parameters.AddWithValue("@Correo", obj.Correo);
+                            comando.Parameters.AddWithValue("@Activo", obj.Activo);
+                            comando.Parameters.AddWithValue("@esAdmin", obj.esAdmin);
+                            comando.CommandType = CommandType.Text;
 
-                    objConexion.Open();
+                            objConexion.Open();
 
-                    resultado = comando.ExecuteNonQuery() > 0;
+                            resultado = comando.ExecuteNonQuery() > 0;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Mensaje = ex.Message;
+                        resultado = false;
+                    }
+                    return resultado;
                 }
-            }
-            catch (Exception ex)
-            {
-                Mensaje = ex.Message;
-                resultado = false;
-            }
-            return resultado;
-        }
 
         public bool Eliminar(int id, out string Mensaje)
         {
@@ -205,6 +212,34 @@ public bool Modificar(Usuario obj, out string Mensaje)
 
                     objConexion.Open();
 
+                    resultado = comando.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Mensaje = ex.Message;
+                resultado = false;
+            }
+            return resultado;
+        }
+
+        public bool CambiarPassword(int idUsuario, byte[] passwordHash, byte[] passwordSalt, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
+                {
+                    string consulta = "UPDATE USUARIO SET PasswordHash = @PasswordHash, PasswordSalt = @PasswordSalt WHERE IdUsuario = @IdUsuario";
+
+                    SqlCommand comando = new SqlCommand(consulta, objConexion);
+                    comando.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                    comando.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                    comando.Parameters.AddWithValue("@PasswordSalt", passwordSalt);
+                    comando.CommandType = CommandType.Text;
+
+                    objConexion.Open();
                     resultado = comando.ExecuteNonQuery() > 0;
                 }
             }

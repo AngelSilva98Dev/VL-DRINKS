@@ -14,12 +14,10 @@ namespace CapaNegocio
     {
         private CD_Usuarios objCapaDato = new CD_Usuarios();
 
-        public List<Usuario> Listar()
+        public List<Usuario> Listar(int idUsuarioLogueado, bool esAdminLogueado)
         {
-            return objCapaDato.Listar();
+            return objCapaDato.Listar(idUsuarioLogueado, esAdminLogueado);
         }
-
-       
 
         public Usuario ValidarUsuario(string correo, string clave, out string Mensaje)
         {
@@ -102,7 +100,7 @@ namespace CapaNegocio
             return objCapaDato.Registrar(obj, out Mensaje);
         }
 
-        public bool Modificar(Usuario obj, out string Mensaje)
+        public bool Modificar(Usuario obj, int idUsuarioLogueado, bool esAdminLogueado, out string Mensaje)
         {
             Mensaje = string.Empty;
 
@@ -112,8 +110,25 @@ namespace CapaNegocio
                 return false;
             }
 
-            Usuario usuarioExistente = objCapaDato.ObtenerUsuarioPorCorreo(obj.Correo);
+            if (!esAdminLogueado && obj.IdUsuario != idUsuarioLogueado)
+            {
+                Mensaje = "Error de Permiso: Solo puedes modificar tu propia cuenta.";
+                return false;
+            }
 
+            if (!esAdminLogueado && obj.esAdmin == true)
+            {
+                Mensaje = "Error de Permiso: No puedes asignarte el rol de Administrador.";
+                return false;
+            }
+
+            if (obj.IdUsuario == 1 && !obj.esAdmin)
+            {
+                Mensaje = "Error de Permiso: No se puede quitar el rol de Admin al usuario principal.";
+                return false;
+            }
+
+            Usuario usuarioExistente = objCapaDato.ObtenerUsuarioPorCorreo(obj.Correo);
             if (usuarioExistente != null && usuarioExistente.IdUsuario != obj.IdUsuario)
             {
                 Mensaje = "El correo electrónico ya está en uso por otro usuario.";
@@ -123,23 +138,45 @@ namespace CapaNegocio
             return objCapaDato.Modificar(obj, out Mensaje);
         }
 
-        public bool Eliminar(int id, out string Mensaje)
+        public bool Eliminar(int idUsuarioAEliminar, bool esAdminActual, out string Mensaje)
         {
             Mensaje = string.Empty;
 
-            if (id == 0)
+            if (!esAdminActual)
             {
-                Mensaje = "No se ha proporcionado un ID de usuario.";
+                Mensaje = "Error de Permiso: Solo un SuperUsuario puede eliminar cuentas.";
                 return false;
             }
 
-            if (id == 1)
+            if (idUsuarioAEliminar == 1)
             {
                 Mensaje = "No se puede eliminar al administrador principal del sistema.";
                 return false;
             }
 
-            return objCapaDato.Eliminar(id, out Mensaje);
+            return objCapaDato.Eliminar(idUsuarioAEliminar, out Mensaje);
+        }
+
+        public bool CambiarPassword(int idUsuarioAfectado, string nuevaClave, int idUsuarioLogueado, bool esAdminLogueado, out string Mensaje)
+        {
+            Mensaje = string.Empty;
+
+            // --- REGLA DE PERMISO ---
+            if (!esAdminLogueado && idUsuarioAfectado != idUsuarioLogueado)
+            {
+                Mensaje = "Error de Permiso: Solo puedes cambiar tu propia contraseña.";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(nuevaClave) || nuevaClave.Length < 6)
+            {
+                Mensaje = "La contraseña debe tener al menos 6 caracteres.";
+                return false;
+            }
+
+            var (hash, salt) = PasswordHasher.HashPassword(nuevaClave);
+
+            return objCapaDato.CambiarPassword(idUsuarioAfectado, hash, salt, out Mensaje);
         }
     }
 }

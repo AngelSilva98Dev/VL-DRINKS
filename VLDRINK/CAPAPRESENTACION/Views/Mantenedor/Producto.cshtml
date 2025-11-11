@@ -241,7 +241,7 @@
                 if(modal) modal.show();
             });
 
-            // 3. Evento: Clic en "Editar" (lápiz)
+            // 3. Evento: Clic en "Editar" 
             $('#tablaProducto tbody').on('click', '.btn-editar', function () {
                 var fila = $(this).closest('tr');
                 var data = tabla.row(fila).data();
@@ -319,7 +319,7 @@
                 });
             });
 
-            // 5. Evento: Clic en "Eliminar" (basura)
+            // 5. Evento: Clic en "Eliminar" 
             $('#tablaProducto tbody').on('click', '.btn-eliminar', function () {
                 var fila = $(this).closest('tr');
                 var data = tabla.row(fila).data();

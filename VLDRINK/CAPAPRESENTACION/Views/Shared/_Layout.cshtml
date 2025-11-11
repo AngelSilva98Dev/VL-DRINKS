@@ -9,6 +9,7 @@
     @Styles.Render("~/Content/datatables")
 
     @*@Scripts.Render("~/bundles/modernizr")*@
+
 </head>
 <body class="sb-nav-fixed">
 
@@ -51,19 +52,22 @@
                             Usuarios
                         </a>
 
-                        <div class="sb-sidenav-menu-heading">Mantenimiento</div>
-                        <a class="nav-link" href="@Url.Action("Categoria","Mantenedor")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Categorias
-                        </a>
-                        <a class="nav-link" href="@Url.Action("Marca","Mantenedor")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-bookmark"></i></div>
-                            Marcas
-                        </a>
-                        <a class="nav-link" href="@Url.Action("Producto","Mantenedor")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
-                            Productos
-                        </a>
+                        @if (Session["UserEsAdmin"] != null && (bool)Session["UserEsAdmin"])
+                        {
+                                <div class="sb-sidenav-menu-heading">Mantenimiento</div>
+                            <a class="nav-link" href="@Url.Action("Categoria","Mantenedor")">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Categorias
+                            </a>
+                            <a class="nav-link" href="@Url.Action("Marca","Mantenedor")">
+                                <div class="sb-nav-link-icon"><i class="fas fa-bookmark"></i></div>
+                                Marcas
+                            </a>
+                            <a class="nav-link" href="@Url.Action("Producto","Mantenedor")">
+                                <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                                Productos
+                            </a>
+                        }
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

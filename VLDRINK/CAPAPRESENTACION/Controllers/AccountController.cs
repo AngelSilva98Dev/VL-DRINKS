@@ -37,6 +37,8 @@ namespace CAPAPRESENTACION.Controllers
 
             Session["UserCorreo"] = usuario.Correo;
             Session["UserNombre"] = usuario.Nombres;
+            Session["UserId"] = usuario.IdUsuario;   
+            Session["UserEsAdmin"] = usuario.esAdmin;
 
             return RedirectToAction("Index", "Home");
         }

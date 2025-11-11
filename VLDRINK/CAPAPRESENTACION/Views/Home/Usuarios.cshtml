@@ -4,6 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+    bool esAdmin = (Session["UserEsAdmin"] != null && (bool)Session["UserEsAdmin"]);
+    int idUsuarioActual = (Session["UserId"] != null) ? (int)Session["UserId"] : 0;
+}
+
+
+
+
 <ol class="breadcrumb mb-4 mt-4">
     <li class="breadcrumb-item"><a href="index.html">Resumen</a></li>
     <li class="breadcrumb-item active">Usuarios</li>
@@ -18,7 +26,10 @@
     <div class=" card-body">
         <div class="row">
             <div class="col-sm-12">
-                <button type="button" class="btn btn-success" id="btnNuevoUsuario">Crear Nuevo</button>
+                @if (esAdmin)
+                {
+                    <button type="button" class="btn btn-success" id="btnNuevoUsuario">Crear Nuevo</button>
+                }
             </div>
         </div>
 
@@ -53,7 +64,6 @@
 
                     <input type="hidden" id="txtIdUsuario" value="0">
 
-
                     <div class="mb-3">
                         <label for="txtNombres" class="form-label">Nombres</label>
                         <input type="text" class="form-control" id="txtNombres" required>
@@ -70,6 +80,11 @@
                         <input type="checkbox" class="form-check-input" id="chkActivo" checked>
                         <label class="form-check-label" for="chkActivo">Activo</label>
                     </div>
+
+                    <div id="divRolAdmin" class="mb-3 form-check" style="display: none;">
+                        <input type="checkbox" class="form-check-input" id="chkEsAdmin">
+                        <label class="form-check-label" for="chkEsAdmin">Es SuperUsuario (Admin)</label>
+                    </div>
                     <div id="modalErrorMsg" class="alert alert-danger d-none" role="alert"></div>
                 </form>
             </div>
@@ -81,10 +96,38 @@
     </div>
 </div>
 
+<div class="modal fade" id="PasswordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="passModalTitulo">Cambiar Contraseña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formPassword">
+                    <input type="hidden" id="hdnUsuarioIdPass" value="0">
+
+                    <div class="mb-3">
+                        <label for="txtNuevaPassword" class="form-label">Nueva Contraseña</label>
+                        <input type="password" class="form-control" id="txtNuevaPassword" required>
+                    </div>
+                    <div id="modalPassErrorMsg" class="alert alert-danger d-none" role="alert"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarPassword">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @section scripts{
     <script>
+        var g_esAdmin = @((Session["UserEsAdmin"] != null && (bool)Session["UserEsAdmin"]).ToString().ToLower());
+        var g_idUsuarioActual = @((Session["UserId"] != null) ? (int)Session["UserId"] : 0);
+
         $(document).ready(function () {
 
             var modal;
@@ -93,6 +136,14 @@
                 modal = new bootstrap.Modal(modalElement);
             }
 
+
+            var passwordModal;
+            var passModalElement = document.getElementById('PasswordModal');
+            if (passModalElement) {
+                passwordModal = new bootstrap.Modal(passModalElement);
+            }
+
+            // 1. Configuración de DataTables
             var tabla = $('#tabla').DataTable({
                 "ajax": {
                     "url": "@Url.Action("ListarUsuarios", "Home")",
@@ -101,6 +152,7 @@
                 },
                 "columns": [
                     { "data": "IdUsuario", "visible": false },
+                    { "data": "esAdmin", "visible": false },
                     { "data": "Nombres" },
                     { "data": "Apellidos" },
                     { "data": "Correo" },
@@ -114,37 +166,71 @@
                         "data": null,
                         "render": function (data, type, row) {
                             var btnEditar = '<button type="button" class="btn btn-primary btn-sm btn-editar" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
-                            var btnEliminar = '<button type="button" class="btn btn-danger btn-sm btn-eliminar" title="Eliminar"><i class="fas fa-trash"></i></button>';
-                            return btnEditar + " " + btnEliminar;
+                            var btnEliminar = '';
+                            var btnPass = ''
+
+                            if (g_esAdmin) {
+                                btnEliminar = ' <button type="button" class="btn btn-danger btn-sm btn-eliminar" title="Eliminar"><i class="fas fa-trash"></i></button>';
+                                btnPass = ' <button type="button" class="btn btn-warning btn-sm btn-password" title="Cambiar Contraseña"><i class="fas fa-key"></i></button>';
+                            } else if (row.IdUsuario == g_idUsuarioActual) {
+                                btnPass = ' <button type="button" class="btn btn-warning btn-sm btn-password" title="Cambiar Contraseña"><i class="fas fa-key"></i></button>';
+                            }
+
+                            return btnEditar + " " + btnEliminar + " " + btnPass;
                         },
                         "orderable": false,
                         "searchable": false,
-                        "width": "90px"
+                        "width": "120px"
                     }
                 ]
             });
 
+            // 2. Evento: "Crear Nuevo"
+            if (!g_esAdmin) {
+                $("#btnNuevoUsuario").hide();
+            }
             $("#btnNuevoUsuario").on("click", function () {
                 $("#formUsuario")[0].reset();
                 $("#txtIdUsuario").val("0");
                 $("#chkActivo").prop("checked", true);
                 $("#modalErrorMsg").addClass("d-none");
                 $("#modalTitulo").text("Nuevo Usuario");
+
+                // --- Lógica de Visibilidad ---
+                if (g_esAdmin) {
+                    $("#divRolAdmin").show();
+                    $("#chkEsAdmin").prop("checked", false);
+                } else {
+                    $("#divRolAdmin").hide();
+                }
+
                 if(modal) modal.show();
             });
 
+            // 3. Evento: Clic en "Editar"
             $('#tabla tbody').on('click', '.btn-editar', function () {
                 var fila = $(this).closest('tr');
                 var data = tabla.row(fila).data();
 
-                if (data) {
-                    var IdUsuario = data.IdUsuario || data.IdUsuario;
+                if (!g_esAdmin && data.IdUsuario != g_idUsuarioActual) {
+                    Swal.fire('Acceso Denegado', 'Solo puedes modificar tu propia cuenta.', 'error');
+                    return;
+                }
 
-                    $("#txtIdUsuario").val(IdUsuario);
+                if (data) {
+                    $("#txtIdUsuario").val(data.IdUsuario);
                     $("#txtNombres").val(data.Nombres);
                     $("#txtApellidos").val(data.Apellidos);
                     $("#txtCorreo").val(data.Correo);
                     $("#chkActivo").prop("checked", data.Activo);
+
+                    // --- Lógica de Visibilidad ---
+                    if (g_esAdmin) {
+                        $("#divRolAdmin").show();
+                        $("#chkEsAdmin").prop("checked", data.esAdmin);
+                    } else {
+                        $("#divRolAdmin").hide();
+                    }
 
                     $("#modalErrorMsg").addClass("d-none");
                     $("#modalTitulo").text("Modificar Usuario");
@@ -152,13 +238,16 @@
                 }
             });
 
+            // 3. Evento: Clic en "Editar"
+
             $("#btnGuardar").on("click", function () {
                 var usuario = {
                     IdUsuario: $("#txtIdUsuario").val(),
                     Nombres: $("#txtNombres").val(),
                     Apellidos: $("#txtApellidos").val(),
                     Correo: $("#txtCorreo").val(),
-                    Activo: $("#chkActivo").is(":checked")
+                    Activo: $("#chkActivo").is(":checked"),
+                    esAdmin: $("#chkEsAdmin").is(":checked")
                 };
 
                 var esNuevo = (usuario.IdUsuario == "0");
@@ -180,31 +269,23 @@
                             $("#modalErrorMsg").text(response.mensaje);
                             $("#modalErrorMsg").removeClass("d-none");
                         }
-                    },
-                    error: function (xhr, status, error) {
-                        $("#modalErrorMsg").text("Error inesperado al guardar: " + status);
-                        $("#modalErrorMsg").removeClass("d-none");
                     }
                 });
             });
 
+            // 5. Evento: Clic en "Eliminar"
             $('#tabla tbody').on('click', '.btn-eliminar', function () {
                 var fila = $(this).closest('tr');
                 var data = tabla.row(fila).data();
 
                 Swal.fire({
                     title: '¿Estás seguro?',
-                    text: `¿Deseas eliminar al usuario ${data.Nombres} ${data.Apellidos}?`,
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
                             url: '@Url.Action("EliminarUsuario", "Home")',
                             type: "POST",
-                            data: { IdUsuario: (data.IdUsuario || data.IdUsuario) },
+                            data: { idUsuario: data.IdUsuario },
                             dataType: "json",
                             success: function (response) {
                                 if (response.operacionExitosa) {
@@ -218,6 +299,66 @@
                     }
                 });
             });
+
+            // Evento Clic en "Cambiar Contraseña"
+            $('#tabla tbody').on('click', '.btn-password', function () {
+                var fila = $(this).closest('tr');
+                var data = tabla.row(fila).data();
+
+                if (data) {
+                    // Llenamos el ID oculto del NUEVO modal
+                    $("#hdnUsuarioIdPass").val(data.IdUsuario);
+                    $("#txtNuevaPassword").val(""); // Limpiamos el campo
+                    $("#modalPassErrorMsg").addClass("d-none");
+
+                    if (passwordModal) passwordModal.show();
+                }
+            });
+
+            // Evento Clic en "Guardar" contraseña
+            $("#btnGuardarPassword").on("click", function () {
+
+                var idUsuario = $("#hdnUsuarioIdPass").val();
+                var nuevaClave = $("#txtNuevaPassword").val();
+
+                // Pedimos confirmación
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: `Se cambiará la contraseña para este usuario.`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, cambiar ahora',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Si confirma, llamamos al nuevo controlador
+                        $.ajax({
+                            url: '@Url.Action("CambiarPassword", "Home")',
+                            type: "POST",
+                            data: {
+                                idUsuario: idUsuario,
+                                nuevaClave: nuevaClave
+                            },
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.operacionExitosa) {
+                                    passwordModal.hide();
+                                    Swal.fire('¡Éxito!', 'La contraseña ha sido actualizada.', 'success');
+                                } else {
+                                    // Muestra el error (ej. "debe tener 6 caracteres")
+                                    $("#modalPassErrorMsg").text(response.mensaje);
+                                    $("#modalPassErrorMsg").removeClass("d-none");
+                                }
+                            },
+                            error: function() {
+                                $("#modalPassErrorMsg").text("Error inesperado al guardar.");
+                                $("#modalPassErrorMsg").removeClass("d-none");
+                            }
+                        });
+                    }
+                });
+            });
+
 
         });
     </script>

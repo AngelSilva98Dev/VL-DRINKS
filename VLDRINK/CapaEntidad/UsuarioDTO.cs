@@ -14,5 +14,7 @@ namespace CapaEntidad
         public string Correo { get; set; }
         public bool Reestablecer { get; set; }
         public bool Activo { get; set; }
+
+        public bool esAdmin { get; set; }
     }
 }

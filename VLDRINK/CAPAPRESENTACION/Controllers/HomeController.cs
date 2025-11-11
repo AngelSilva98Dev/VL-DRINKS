@@ -24,9 +24,10 @@ namespace CAPAPRESENTACION.Controllers
         [HttpGet]
         public JsonResult ListarUsuarios()
         {
+            int idUsuarioLogueado = (int)Session["UserId"];
+            bool esAdminLogueado = (bool)Session["UserEsAdmin"];
 
-            List<Usuario> listaCompleta = new CN_Usuarios().Listar();
-
+            List<Usuario> listaCompleta = new CN_Usuarios().Listar(idUsuarioLogueado, esAdminLogueado);
 
             List<UsuarioDTO> listaParaElCliente = listaCompleta.Select(u => new UsuarioDTO
             {
@@ -35,9 +36,8 @@ namespace CAPAPRESENTACION.Controllers
                 Apellidos = u.Apellidos,
                 Correo = u.Correo,
                 Activo = u.Activo,
-                Reestablecer = u.Reestablecer
+                esAdmin = u.esAdmin
             }).ToList();
-
 
             return Json(new { data = listaParaElCliente }, JsonRequestBehavior.AllowGet);
         }
@@ -48,6 +48,11 @@ namespace CAPAPRESENTACION.Controllers
         [HttpPost]
         public JsonResult GuardarUsuario(string Nombres, string Apellidos, string Correo, bool Activo)
         {
+            if (!(bool)Session["UserEsAdmin"])
+            {
+                return Json(new { operacionExitosa = false, mensaje = "Permiso denegado." });
+            }
+
             string mensaje = string.Empty;
             int idGenerado = 0;
 
@@ -72,21 +77,50 @@ namespace CAPAPRESENTACION.Controllers
             string mensaje = string.Empty;
             bool resultado = false;
 
+            int idUsuarioLogueado = (int)Session["UserId"];
+            bool esAdminLogueado = (bool)Session["UserEsAdmin"];
+
             CN_Usuarios objNegocio = new CN_Usuarios();
-            resultado = objNegocio.Modificar(objeto, out mensaje);
+
+            resultado = objNegocio.Modificar(objeto, idUsuarioLogueado, esAdminLogueado, out mensaje);
 
             return Json(new { operacionExitosa = resultado, mensaje = mensaje });
         }
 
-
         [HttpPost]
-        public JsonResult EliminarUsuario(int idUsuario)
+        public JsonResult EliminarUsuario(int idUsuario) 
         {
             string mensaje = string.Empty;
-            bool resultado = false;
+
+            // Leemos el rol de la sesión
+            bool esAdminActual = (bool)Session["UserEsAdmin"];
 
             CN_Usuarios objNegocio = new CN_Usuarios();
-            resultado = objNegocio.Eliminar(idUsuario, out mensaje);
+
+            // Pasamos el rol a la Capa de Negocio
+            bool resultado = objNegocio.Eliminar(idUsuario, esAdminActual, out mensaje);
+
+            return Json(new { operacionExitosa = resultado, mensaje = mensaje });
+        }
+
+        [HttpPost]
+        public JsonResult CambiarPassword(int idUsuario, string nuevaClave)
+        {
+            string mensaje = string.Empty;
+
+
+            int idUsuarioLogueado = (int)Session["UserId"];
+            bool esAdminLogueado = (bool)Session["UserEsAdmin"];
+
+            CN_Usuarios objNegocio = new CN_Usuarios();
+
+
+            bool resultado = objNegocio.CambiarPassword(
+                idUsuario, 
+                nuevaClave,
+                idUsuarioLogueado, 
+                esAdminLogueado, 
+                out mensaje);
 
             return Json(new { operacionExitosa = resultado, mensaje = mensaje });
         }
