@@ -20,6 +20,9 @@ namespace CapaEntidad
         public bool Reestablecer { get; set; }
 
         public bool Activo { get; set; }
+        public bool esAdmin { get; set; }
+
+        public DateTime? FechaUltimoReinicio { get; set; }
 
         [MaxLength(20)]
         public byte[] PasswordHash { get; set; }
@@ -27,6 +30,5 @@ namespace CapaEntidad
         [MaxLength(32)]
         public byte[] PasswordSalt { get; set; }
 
-        public bool esAdmin { get; set; }
     }
 }

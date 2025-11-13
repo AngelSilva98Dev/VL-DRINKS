@@ -178,6 +178,79 @@ namespace CapaNegocio
 
             return objCapaDato.CambiarPassword(idUsuarioAfectado, hash, salt, out Mensaje);
         }
+
+        public bool SolicitarReestablecimiento(string correo, out string Mensaje)
+        {
+            Mensaje = string.Empty;
+
+            //Validacion por correo
+            Usuario usuario = objCapaDato.ObtenerUsuarioPorCorreo(correo);
+            if (usuario == null)
+            {
+                Mensaje = "No se encontró ningún usuario con esa dirección de correo.";
+                return false;
+            }
+
+            //Validacion por ultimo reestablecimiento
+            if (usuario.FechaUltimoReinicio.HasValue) 
+            {
+                TimeSpan diferencia = DateTime.Now - usuario.FechaUltimoReinicio.Value;
+
+                if (diferencia.TotalMinutes < 2)
+                {
+                    int segundosRestantes = 120 - (int)diferencia.TotalSeconds;
+                    Mensaje = $"Ya has solicitado un reinicio recientemente. Por favor, espera {segundosRestantes} segundos.";
+                    return false;
+                }
+            }
+            string nuevaClave = GenerarClaveAleatoria(8);
+
+            var (hash, salt) = PasswordHasher.HashPassword(nuevaClave);
+
+            bool actualizado = objCapaDato.ActualizarPassword(usuario.IdUsuario, hash, salt, out Mensaje);
+
+            if (!actualizado)
+            {
+                Mensaje = "Error al actualizar la contraseña en la base de datos.";
+                return false;
+            }
+
+
+            bool emailEnviado = EnviarEmail(correo, "VLDRINKS - Contraseña Reestablecida",
+                $"Hola {usuario.Nombres},<br><br>Tu nueva contraseña es: <b>{nuevaClave}</b>");
+
+            if (!emailEnviado)
+            {
+                Mensaje = "Contraseña actualizada en BBDD, pero falló el envío de email.";
+                return true; 
+            }
+
+            Mensaje = "¡Éxito! Se ha enviado una nueva contraseña a tu correo.";
+            return true;
+        }
+
+        private string GenerarClaveAleatoria(int longitud)
+        {
+            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
+            Random random = new Random();
+
+            return new string(Enumerable.Repeat(chars, longitud)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        private bool EnviarEmail(string correo, string asunto, string cuerpoHtml)
+        {
+            try
+            {
+                return ServicioEmail.Enviar(correo, asunto, cuerpoHtml);
+            }
+            catch (Exception ex)
+            {
+
+                System.Diagnostics.Debug.WriteLine($"Error al llamar a ServicioEmail: {ex.Message}");
+                return false;
+            }
+        }
     }
 }
 

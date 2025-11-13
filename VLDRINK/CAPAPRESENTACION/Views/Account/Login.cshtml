@@ -36,7 +36,9 @@
                                         }
 
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="#">Recuperar Contraseña</a>
+                                            <a href="#" class="small" data-bs-toggle="modal" data-bs-target="#RecuperarModal">
+                                                ¿Olvidaste tu contraseña?
+                                            </a>
 
                                             <button type="submit" class="btn btn-primary">Ingresar</button>
 
@@ -67,3 +69,123 @@
         </div>
     </div>
 </body>
+
+<div class="modal fade" id="RecuperarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Recuperar Contraseña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formRecuperar">
+                    <div class="small mb-3 text-muted">
+                        Ingresa tu correo electrónico y te enviaremos una nueva contraseña.
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="inputEmailRecuperar" type="email" placeholder="name@example.com" name="email" required />
+                        <label for="inputEmailRecuperar">Correo Electrónico</label>
+                    </div>
+
+                    <div id="modalRecuperarError" class="alert alert-danger d-none" role="alert"></div>
+                    <div id="modalRecuperarExito" class="alert alert-success d-none" role="alert"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnEnviarRecuperacion">Reestablecer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            var btnReestablecer = $("#btnEnviarRecuperacion");
+
+            // --- FUNCIÓN AÑADIDA: El Contador ---
+            function iniciarContador(segundos) {
+                btnReestablecer.prop("disabled", true); // Deshabilita el botón
+
+                var contador = setInterval(function () {
+                    segundos--;
+                    btnReestablecer.text(`Esperar (${segundos}s)`);
+
+                    if (segundos <= 0) {
+                        clearInterval(contador);
+                        btnReestablecer.text("Reestablecer");
+                        btnReestablecer.prop("disabled", false); // Habilita de nuevo
+                    }
+                }, 1000); // 1000ms = 1 segundo
+            }
+
+            // 1. Escuchamos el clic en el botón "Reestablecer"
+            btnReestablecer.on("click", function () {
+
+                $("#modalRecuperarError").addClass("d-none");
+                $("#modalRecuperarExito").addClass("d-none");
+
+                var email = $("#inputEmailRecuperar").val();
+
+                // Deshabilitamos el botón MIENTRAS se hace la llamada
+                btnReestablecer.prop("disabled", true);
+                btnReestablecer.text("Enviando...");
+
+                // 4. Hacemos la llamada AJAX
+                $.ajax({
+                    url: '@Url.Action("SolicitarReestablecimiento", "Account")',
+                    type: "POST",
+                    data: { email: email },
+                    dataType: "json",
+                    success: function (response) {
+
+                        // --- LÓGICA DE RESPUESTA MEJORADA ---
+                        if (response.operacionExitosa) {
+                            // Éxito real
+                            $("#modalRecuperarExito").text(response.mensaje);
+                            $("#modalRecuperarExito").removeClass("d-none");
+                            // Cerramos el modal después de 3 seg de éxito
+                            setTimeout(function() {
+                                var modal = bootstrap.Modal.getInstance(document.getElementById('RecuperarModal'));
+                                modal.hide();
+                            }, 3000);
+                        }
+                        else {
+                            // Comprobamos si es un error de TIEMPO DE ESPERA
+                            if (response.mensaje.startsWith("TIEMPO_ESPERA|")) {
+                                // Es un error de tiempo, iniciamos el contador
+                                var partes = response.mensaje.split("|");
+                                var segundos = parseInt(partes[1]);
+                                iniciarContador(segundos);
+
+                                // Mostramos el error igualmente
+                                $("#modalRecuperarError").text(`Por favor, espera ${segundos} segundos.`);
+                                $("#modalRecuperarError").removeClass("d-none");
+                            } else {
+                                // Es un error normal (ej. "Usuario no encontrado")
+                                $("#modalRecuperarError").text(response.mensaje);
+                                $("#modalRecuperarError").removeClass("d-none");
+
+                                // Habilitamos el botón de nuevo
+                                btnReestablecer.text("Reestablecer");
+                                btnReestablecer.prop("disabled", false);
+                            }
+                        }
+                    },
+                    error: function () {
+                        $("#modalRecuperarError").text("Error de conexión. Intente de nuevo.");
+                        $("#modalRecuperarError").removeClass("d-none");
+
+                        // Habilitamos el botón de nuevo
+                        btnReestablecer.text("Reestablecer");
+                        btnReestablecer.prop("disabled", false);
+                    }
+                });
+
+            });
+        });
+    </script>
+}

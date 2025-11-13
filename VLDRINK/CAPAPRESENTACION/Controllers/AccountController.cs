@@ -98,5 +98,28 @@ namespace CAPAPRESENTACION.Controllers
                 return View();
             }
         }
+
+        [AllowAnonymous] 
+        [HttpPost]
+        public JsonResult SolicitarReestablecimiento(string email)
+        {
+            string mensajeError = string.Empty;
+            CN_Usuarios objNegocio = new CN_Usuarios();
+
+            // --- PRÓXIMO PASO: ---
+            // Llamaremos a la CapaNegocio. El método 'SolicitarReestablecimiento'
+            // que está aquí abajo todavía no existe. Lo crearemos en el siguiente paso.
+            bool resultado = objNegocio.SolicitarReestablecimiento(email, out mensajeError);
+
+            // Devolvemos una respuesta JSON que el JavaScript pueda entender
+            if (resultado)
+            {
+                return Json(new { operacionExitosa = true, mensaje = mensajeError });
+            }
+            else
+            {
+                return Json(new { operacionExitosa = false, mensaje = mensajeError });
+            }
+        }
     }
 }

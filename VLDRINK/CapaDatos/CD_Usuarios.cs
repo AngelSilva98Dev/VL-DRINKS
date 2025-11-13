@@ -66,13 +66,13 @@ namespace CapaDatos
 
         public Usuario ObtenerUsuarioPorCorreo(string correo)
         {
-            Usuario usuario = null; // Inicia como nulo
+            Usuario usuario = null; 
             try
             {
                 using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
                 {
-                    // Traemos TODOS los datos, incluido Hash y Salt
-                    string consulta = "SELECT IdUsuario, Nombres, Apellidos, Correo, Reestablecer, Activo, PasswordHash, PasswordSalt, esAdmin FROM USUARIO WHERE Correo = @correo";
+                    string consulta = "SELECT IdUsuario, Nombres, Apellidos, Correo, Reestablecer, Activo, esAdmin , FechaUltimoReinicio ,PasswordHash, PasswordSalt " +
+                                      "FROM USUARIO WHERE Correo = @correo";
 
                     SqlCommand comando = new SqlCommand(consulta, objConexion);
                     comando.Parameters.AddWithValue("@correo", correo);
@@ -82,7 +82,7 @@ namespace CapaDatos
 
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
-                        if (lector.Read()) // Si encontramos al usuario
+                        if (lector.Read()) 
                         {
                             usuario = new Usuario
                             {
@@ -94,8 +94,14 @@ namespace CapaDatos
                                 Activo = Convert.ToBoolean(lector["Activo"]),
                                 esAdmin = Convert.ToBoolean(lector["esAdmin"]),
 
-                                // --- FORMA MÁS SEGURA ---
-                                // Revisa si es nulo antes de convertirlo
+
+                                //LECTOR NULL RESTABLECIMIENTO DE PASSWORD
+                                FechaUltimoReinicio = lector["FechaUltimoReinicio"] == DBNull.Value
+                                            ? (DateTime?)null 
+                                            : Convert.ToDateTime(lector["FechaUltimoReinicio"]),
+
+
+                                //LECTORES NULL ENCRIPTADO PASSWORD
                                 PasswordHash = lector["PasswordHash"] == DBNull.Value
                         ? null
                         : (byte[])lector["PasswordHash"],
@@ -232,6 +238,39 @@ namespace CapaDatos
                 using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
                 {
                     string consulta = "UPDATE USUARIO SET PasswordHash = @PasswordHash, PasswordSalt = @PasswordSalt WHERE IdUsuario = @IdUsuario";
+
+                    SqlCommand comando = new SqlCommand(consulta, objConexion);
+                    comando.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                    comando.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                    comando.Parameters.AddWithValue("@PasswordSalt", passwordSalt);
+                    comando.CommandType = CommandType.Text;
+
+                    objConexion.Open();
+                    resultado = comando.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Mensaje = ex.Message;
+                resultado = false;
+            }
+            return resultado;
+        }
+
+        public bool ActualizarPassword(int idUsuario, byte[] passwordHash, byte[] passwordSalt, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
+                {
+                    string consulta = "UPDATE USUARIO SET " +
+                                      "PasswordHash = @PasswordHash, " +
+                                      "PasswordSalt = @PasswordSalt, " +
+                                      "Reestablecer = 0, " +
+                                      "FechaUltimoReinicio = GETDATE() " +
+                                      "WHERE IdUsuario = @IdUsuario";
 
                     SqlCommand comando = new SqlCommand(consulta, objConexion);
                     comando.Parameters.AddWithValue("@IdUsuario", idUsuario);
