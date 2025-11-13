@@ -49,10 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\VLDRINKS\TrabajoPracticoP2\VLDRINK\VLDRINKS.CORE\VLDRINKS.CORE.csproj">
-      <Project>{8da60d78-296a-4c42-b6be-e31888c06251}</Project>
-      <Name>VLDRINKS.CORE</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
       <Project>{3d5151f2-bf62-4e0c-8854-2c8247346507}</Project>
       <Name>CapaDatos</Name>
@@ -60,6 +56,10 @@
     <ProjectReference Include="..\CapaEntidad\CapaEntidad.csproj">
       <Project>{7b28951c-79c1-4727-8cd5-e8c1681e4cd6}</Project>
       <Name>CapaEntidad</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VLDRINKS.CORE\VLDRINKS.CORE.csproj">
+      <Project>{8da60d78-296a-4c42-b6be-e31888c06251}</Project>
+      <Name>VLDRINKS.CORE</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
