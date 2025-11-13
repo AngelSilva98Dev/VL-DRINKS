@@ -3,6 +3,16 @@
   "WorkspaceRootPath": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8DA60D78-296A-4C42-B6BE-E31888C06251}|..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\VLDRINKS.CORE.csproj|d:\\programacion\\vldrinks\\trabajopracticop2\\vldrink\\vldrinks.core\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DA60D78-296A-4C42-B6BE-E31888C06251}|..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\VLDRINKS.CORE.csproj|d:\\programacion\\vldrinks\\trabajopracticop2\\vldrink\\vldrinks.core\\servicioemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capadatos\\cd_productos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\cd_productos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capadatos\\cd_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\cd_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,9 +23,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{32E01B3D-D7C8-4920-A5F5-4C0EA307E934}|CapaNegocio\\CapaNegocio.csproj|d:\\programacion\\tp final\\vldrink\\capanegocio\\cn_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{32E01B3D-D7C8-4920-A5F5-4C0EA307E934}|CapaNegocio\\CapaNegocio.csproj|solutionrelative:capanegocio\\cn_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DA60D78-296A-4C42-B6BE-E31888C06251}|..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\VLDRINKS.CORE.csproj|d:\\programacion\\vldrinks\\trabajopracticop2\\vldrink\\vldrinks.core\\servicioemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7B28951C-79C1-4727-8CD5-E8C1681E4CD6}|CapaEntidad\\CapaEntidad.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capaentidad\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -36,9 +43,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\controllers\\adminbasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|solutionrelative:capapresentacion\\controllers\\adminbasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DA60D78-296A-4C42-B6BE-E31888C06251}|..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\VLDRINKS.CORE.csproj|d:\\programacion\\vldrinks\\trabajopracticop2\\vldrink\\vldrinks.core\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE94274C-19B2-4560-9D53-6314659E1E74}|CAPAPRESENTACION\\CAPAPRESENTACION.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capapresentacion\\controllers\\mantenedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,10 +87,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7B28951C-79C1-4727-8CD5-E8C1681E4CD6}|CapaEntidad\\CapaEntidad.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capaentidad\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7B28951C-79C1-4727-8CD5-E8C1681E4CD6}|CapaEntidad\\CapaEntidad.csproj|solutionrelative:capaentidad\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capadatos\\cd_productos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\cd_productos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3D5151F2-BF62-4E0C-8854-2C8247346507}|CapaDatos\\CapaDatos.csproj|D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\capadatos\\cd_clientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -163,8 +163,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 30,
+          "SelectedChildIndex": 32,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -191,15 +195,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "ServicioEmail.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\ServicioEmail.cs",
               "RelativeDocumentMoniker": "..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\ServicioEmail.cs",
               "ToolTip": "D:\\PROGRAMACION\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\ServicioEmail.cs",
               "RelativeToolTip": "..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\ServicioEmail.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACQAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-13T16:06:29.301Z"
+              "WhenOpened": "2025-11-13T16:06:29.301Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -212,7 +217,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "MantenedorController.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\MantenedorController.cs",
@@ -224,7 +229,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "AdminBaseController.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\AdminBaseController.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\AdminBaseController.cs",
@@ -236,7 +241,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "Producto.cshtml",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Mantenedor\\Producto.cshtml",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Mantenedor\\Producto.cshtml",
@@ -248,7 +253,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "Producto.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaEntidad\\Producto.cs",
               "RelativeDocumentMoniker": "CapaEntidad\\Producto.cs",
@@ -260,7 +265,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "CN_Productos.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaNegocio\\CN_Productos.cs",
               "RelativeDocumentMoniker": "CapaNegocio\\CN_Productos.cs",
@@ -284,15 +289,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 2,
               "Title": "CD_Productos.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaDatos\\CD_Productos.cs",
               "RelativeDocumentMoniker": "CapaDatos\\CD_Productos.cs",
               "ToolTip": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaDatos\\CD_Productos.cs",
               "RelativeToolTip": "CapaDatos\\CD_Productos.cs",
-              "ViewState": "AgIAAKkAAAAAAAAAAAAuwMUAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-05T02:33:59.093Z"
+              "WhenOpened": "2025-11-05T02:33:59.093Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -332,7 +338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\_ViewStart.cshtml",
@@ -380,7 +386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "Registrar.cshtml",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Account\\Registrar.cshtml",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Account\\Registrar.cshtml",
@@ -416,7 +422,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "HomeController.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\HomeController.cs",
@@ -428,7 +434,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "_LayoutLogin.cshtml",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Shared\\_LayoutLogin.cshtml",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Shared\\_LayoutLogin.cshtml",
@@ -464,7 +470,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Conexion.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaDatos\\Conexion.cs",
               "RelativeDocumentMoniker": "CapaDatos\\Conexion.cs",
@@ -476,7 +482,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "CD_Usuarios.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaDatos\\CD_Usuarios.cs",
               "RelativeDocumentMoniker": "CapaDatos\\CD_Usuarios.cs",
@@ -489,7 +495,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "PasswordHasher.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
               "RelativeDocumentMoniker": "..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
@@ -497,11 +503,12 @@
               "RelativeToolTip": "..\\..\\VLDRINKS\\TrabajoPracticoP2\\VLDRINK\\VLDRINKS.CORE\\PasswordHasher.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAQwBcAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-01T06:07:57.751Z"
+              "WhenOpened": "2025-11-01T06:07:57.751Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Shared\\_Layout.cshtml",
@@ -513,7 +520,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Web.config",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Web.config",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Web.config",
@@ -526,7 +533,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "CN_Usuarios.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaNegocio\\CN_Usuarios.cs",
               "RelativeDocumentMoniker": "CapaNegocio\\CN_Usuarios.cs",
@@ -539,7 +546,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "AccountController.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Controllers\\AccountController.cs",
@@ -551,7 +558,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Login.cshtml",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Account\\Login.cshtml",
@@ -564,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Usuario.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaEntidad\\Usuario.cs",
               "RelativeDocumentMoniker": "CapaEntidad\\Usuario.cs",
@@ -588,7 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Usuarios.cshtml",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
               "RelativeDocumentMoniker": "CAPAPRESENTACION\\Views\\Home\\Usuarios.cshtml",
@@ -624,7 +631,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "UsuarioDTO.cs",
               "DocumentMoniker": "D:\\PROGRAMACION\\TP FINAL\\VLDRINK\\CapaEntidad\\UsuarioDTO.cs",
               "RelativeDocumentMoniker": "CapaEntidad\\UsuarioDTO.cs",
