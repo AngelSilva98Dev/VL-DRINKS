@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace CAPAPRESENTACION.Controllers
 {
+    [Authorize]
     public class MantenedorController : Controller
     {
         // GET: Mantenedor
