@@ -18,7 +18,7 @@
     <div class=" card-body">
         <div class="row">
             <div class="col-sm-12">
-                <button type="button" class="btn btn-success">Crear Nuevo</button>
+                <button type="button" class="btn btn-success" onclick="abrirModal(null)">Crear Nuevo</button>
             </div>
         </div>
 
@@ -30,6 +30,7 @@
                     <th>Apellidos</th>
                     <th>Correo</th>
                     <th>Activo</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -38,21 +39,255 @@
 
     </div>
 </div>
+<!--Modal-->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white" >
+                <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input id="txtidusuario"  value="0" type="hidden" />
+                <div class="row g-2">
+                    <div class="col-sm-6">
+                        <label for="txtnombres" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="txtnombres" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="txtapellidos" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" id="txtapellidos"  autocomplete="off" >
+                    </div>
+
+                    <div class="col-sm-10">
+                        <label for="txtemail" class="form-label">Correo</label>
+                        <input type="text" class="form-control" id="txtemail" autocomplete="off" >
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="cboactivo" class="form-label">Activo</label>
+                        <select id="cboactivo" class="form-select">                            
+                            <option value="1">Si</option>
+                            <option value="0">No</option>                            
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div id="mensajeAlerta" class="alert alert-danger" role="alert">
+                            <i class="fa fa-exclamation-triangle me-2" aria-hidden="true"></i>
+                            A simple danger alert—check it out!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts{
     <script>
 
-        jQuery.ajax({
-            url: '@Url.Action("ListarUsuarios","Home")',
-            type: "GET",
-            dataType: "json",
-            contentType: "aplication/json; charset=utf-8",
-            success: function (data) {
-                debugger;
-                var text1 = "hola"
-                console.log(data)
+       let tablaDatos;
+        var filaSeleccionada
+
+        tablaDatos = $("#tabla").DataTable({
+            responsive: true,
+            ordering: false,
+            "ajax": {
+                url: '@Url.Action("ListarUsuarios","Home")',
+                type: "GET",
+                dataType: "json"
+            },
+            "columns": [
+                { "data": "Nombres" },
+                { "data": "Apellidos" },
+                { "data": "Correo" },
+                {
+                    "data": "Activo", "render": function (valor) {
+                        if (valor) {
+                            return '<span class= "badge bg-success">Si</span>'
+                        } else {
+                            return '<span class="badge bg-danger">No</span'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"><i class= "fas fa-pen"></i></button>' +
+                        '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class= "fas fa-trash"></i></button>',
+                    "orderable": false,
+                    "searchable": false,
+                        "width":"90px"
+
+                }
+
+            ],
+            "language": {
+                "url":"//cdn.datatables.net/plug-ins/2.3.4/i18n/es-ES.json"
             }
+        });
+
+        function abrirModal(json) {
+
+            $("#txtidusuario").val(0);
+            $("#txtnombres").val("");
+            $("#txtapellidos").val("");
+            $("#txtemail").val("");
+            $("#cboactivo").val(1);
+
+            $("#mensajeAlerta").hide();
+
+            if (json != null) {
+
+                $("#txtidusuario").val(json.IdUsuario);
+                $("#txtnombres").val(json.Nombres);
+                $("#txtapellidos").val(json.Apellidos);
+                $("#txtemail").val(json.Correo);
+                $("#cboactivo").val(json.Activo == true ? 1 : 0);
+
+
+            }
+
+            $("#FormModal").modal("show")
+        }
+
+        $("#tabla tbody").on("click", '.btn-editar', function () {
+
+            filaSeleccionada = $(this).closest("tr");
+
+            var data = tablaDatos.row(filaSeleccionada).data();
+
+            abrirModal(data)
         })
+
+
+        $("#tabla tbody").on("click", '.btn-eliminar', function () {
+
+            var usuarioSeleccionado = $(this).closest("tr");
+
+            var data = tablaDatos.row(usuarioSeleccionado).data();
+
+            swal({
+                title: "Estas seguro?",
+                text: "Esto eliminara al usuario permanentemente",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Si",
+                cancelButtonText: "No",
+                closeOnConfirm: false
+            },
+                function () {
+                    jQuery.ajax({
+                        url: '@Url.Action("EliminarUsuario","Home")',
+                        type: "POST",
+                        data: JSON.stringify({ id: data.IdUsuario }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+
+                            if (data.resultado) {
+                                tablaDatos.row(usuarioSeleccionado).remove().draw();
+                                swal("Eliminado!", "El usuario ha sido removido", "success");
+
+                            } else {
+                                swal("No se pudo eliminar", data.mensaje, "error");
+                            }
+
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                   
+                });
+
+            console.log(data);
+        })
+
+        function Guardar() {
+
+            var Usuario = {
+                Activo: $("#cboactivo").val() == 1 ? true : false,
+                Apellidos: $("#txtapellidos").val(),
+                Correo: $("#txtemail").val(),
+                IdUsuario: $("#txtidusuario").val(),
+                Nombres: $("#txtnombres").val()
+
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("GuardarUsuario","Home")',
+                type: "POST",
+                data: JSON.stringify({objUsuario: Usuario }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    if (Usuario.IdUsuario == 0) {
+
+                        if (data.resultado != 0) {
+
+                            Usuario.IdUsuario = data.resultado;
+                            tablaDatos.row.add(Usuario).draw(false);
+                            $("#FormModal").modal("hide")
+
+                        } else {
+
+                            $("#mensajeAlerta").html('<i class="fa fa-exclamation-triangle me-2" aria-hidden="true"></i>'+data.mensaje);
+                            $("#mensajeAlerta").show();
+                            setTimeout(() => {
+                                $("#mensajeAlerta").fadeOut();
+                            }, 3500);
+                        }
+
+                    } else {
+
+                        if (data.resultado) {
+
+                            tablaDatos.row(filaSeleccionada).data(Usuario).draw(false);
+                            filaSeleccionada = null;
+                            $("#FormModal").modal("hide")
+
+                        } else {
+
+                            $("#mensajeAlerta").html('<i class="fa fa-exclamation-triangle me-2" aria-hidden="true"></i>' + data.mensaje);
+                            $("#mensajeAlerta").show();
+                            setTimeout(() => {
+                                $("#mensajeAlerta").fadeOut();
+                            }, 3500);
+                        }
+
+
+                    }
+                },
+                error: function (error) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#mensajeAlerta").html('<i class="fa fa-exclamation-triangle me-2" aria-hidden="true"></i>' + "Error ajax");
+                    $("#mensajeAlerta").show();
+                },
+                beforeSend: function () {
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+
+        }
 
     </script>
 }
