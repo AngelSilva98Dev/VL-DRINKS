@@ -9,17 +9,85 @@ namespace CapaDatos
     public class CD_Productos
     {
         // LEER (Listar)
-        public List<Producto> Listar()
+        //public List<Producto> Listar(bool incluirImagen = false) 
+        //{
+        //    List<Producto> lista = new List<Producto>();
+        //    try
+        //    {
+        //        using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
+        //        {
+
+        //            string consulta = @"
+        //        SELECT 
+        //            p.IdProducto, p.Nombre, p.Descripcion, p.Precio, p.Stock, p.Activo,
+        //            p.NombreImagen, 
+        //            Imagen = CASE WHEN @incluirImagen = 1 THEN p.Imagen ELSE '' END, 
+        //            m.IdMarca, m.Descripcion AS MarcaDescripcion,
+        //            c.IdCategoria, c.Descripcion AS CategoriaDescripcion
+        //        FROM 
+        //            PRODUCTO p
+        //        INNER JOIN 
+        //            MARCA m ON p.IdMarca = m.IdMarca
+        //        INNER JOIN 
+        //            CATEGORIA c ON p.IdCategoria = c.IdCategoria";
+
+        //            SqlCommand comando = new SqlCommand(consulta, objConexion);
+
+        //            comando.Parameters.AddWithValue("@incluirImagen", incluirImagen ? 1 : 0);
+
+        //            comando.CommandType = CommandType.Text;
+        //            objConexion.Open();
+
+        //            using (SqlDataReader lector = comando.ExecuteReader())
+        //            {
+        //                while (lector.Read())
+        //                {
+        //                    lista.Add(new Producto()
+        //                    {
+        //                        IdProducto = Convert.ToInt32(lector["IdProducto"]),
+        //                        Nombre = lector["Nombre"].ToString(),
+        //                        Descripcion = lector["Descripcion"].ToString(),
+        //                        Precio = Convert.ToDecimal(lector["Precio"]),
+        //                        Stock = Convert.ToInt32(lector["Stock"]),
+        //                        Activo = Convert.ToBoolean(lector["Activo"]),
+        //                        NombreImagen = lector["NombreImagen"].ToString(),
+        //                        Imagen = lector["Imagen"].ToString(), 
+
+        //                        objMarca = new Marca()
+        //                        {
+        //                            IdMarca = Convert.ToInt32(lector["IdMarca"]),
+        //                            Descripcion = lector["MarcaDescripcion"].ToString()
+        //                        },
+        //                        objCategoria = new Categoria()
+        //                        {
+        //                            IdCategoria = Convert.ToInt32(lector["IdCategoria"]),
+        //                            Descripcion = lector["CategoriaDescripcion"].ToString()
+        //                        }
+        //                    });
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lista = new List<Producto>();
+        //    }
+        //    return lista;
+        //}
+
+        public List<Producto> Listar(bool incluirImagen = false)
         {
             List<Producto> lista = new List<Producto>();
             try
             {
                 using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
                 {
+
                     string consulta = @"
                 SELECT 
                     p.IdProducto, p.Nombre, p.Descripcion, p.Precio, p.Stock, p.Activo,
-                    p.NombreImagen, -- <--- AÑADIDO
+                    p.NombreImagen, 
+                    Imagen = CASE WHEN @incluirImagen = 1 THEN p.Imagen ELSE '' END, 
                     m.IdMarca, m.Descripcion AS MarcaDescripcion,
                     c.IdCategoria, c.Descripcion AS CategoriaDescripcion
                 FROM 
@@ -30,6 +98,9 @@ namespace CapaDatos
                     CATEGORIA c ON p.IdCategoria = c.IdCategoria";
 
                     SqlCommand comando = new SqlCommand(consulta, objConexion);
+
+                    comando.Parameters.AddWithValue("@incluirImagen", incluirImagen ? 1 : 0);
+
                     comando.CommandType = CommandType.Text;
                     objConexion.Open();
 
@@ -45,7 +116,9 @@ namespace CapaDatos
                                 Precio = Convert.ToDecimal(lector["Precio"]),
                                 Stock = Convert.ToInt32(lector["Stock"]),
                                 Activo = Convert.ToBoolean(lector["Activo"]),
-                                NombreImagen = lector["NombreImagen"].ToString(), 
+                                NombreImagen = lector["NombreImagen"].ToString(),
+                                Imagen = lector["Imagen"].ToString(), 
+
                                 objMarca = new Marca()
                                 {
                                     IdMarca = Convert.ToInt32(lector["IdMarca"]),
@@ -63,7 +136,7 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                throw ex;
+                lista = new List<Producto>();
             }
             return lista;
         }

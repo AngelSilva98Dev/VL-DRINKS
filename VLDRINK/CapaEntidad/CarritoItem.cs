@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace CapaEntidad
 {
-    public  class DetalleVenta
+    public class CarritoItem
     {
-        public int IdDetalleVenta { get; set; }
-        public int IdVenta { get; set; }
         public Producto objProducto { get; set; }
         public int Cantidad { get; set; }
-        public decimal Total { get; set; }
-
-        public string IdTransaccion { get; set; }
+        public decimal Subtotal
+        {
+            get { return objProducto.Precio * Cantidad; }
+        }
     }
 }

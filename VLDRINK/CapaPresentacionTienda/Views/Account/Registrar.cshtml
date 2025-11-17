@@ -18,6 +18,7 @@
                                     {
                                         @Html.AntiForgeryToken()
 
+                                        @*DATOS PERSONALES*@
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3 mb-md-0">
@@ -32,15 +33,20 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        @*EMAIL*@
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email" required />
                                             <label for="inputEmail">Correo Electrónico</label>
                                         </div>
-
+                                        @*PASSWORD*@
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="inputPassword" type="password" placeholder="Contraseña" name="password" required />
                                             <label for="inputPassword">Contraseña</label>
+                                        </div>
+                                        @*CHECK +18*@
+                                        <div class="mb-3 form-check">
+                                            <input type="checkbox" class="form-check-input" id="chkEsMayor" name="esMayor" value="true" required>
+                                            <label class="form-check-label" for="chkEsMayor">Confirmo que soy mayor de 18 años.</label>
                                         </div>
 
                                         if (ViewBag.Error != null)

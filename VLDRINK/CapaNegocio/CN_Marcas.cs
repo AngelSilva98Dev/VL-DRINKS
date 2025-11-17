@@ -6,7 +6,6 @@ namespace CapaNegocio
 {
     public class CN_Marcas
     {
-        // Usando el nombre de variable 'objCapaDato'
         private CD_Marcas objCapaDato = new CD_Marcas();
 
         public List<Marca> Listar()
@@ -43,9 +42,6 @@ namespace CapaNegocio
         public bool Eliminar(int id, out string Mensaje)
         {
             Mensaje = string.Empty;
-
-            // (Aquí puedes añadir reglas, ej: "No eliminar marca si tiene productos asociados")
-
             return objCapaDato.Eliminar(id, out Mensaje);
         }
     }

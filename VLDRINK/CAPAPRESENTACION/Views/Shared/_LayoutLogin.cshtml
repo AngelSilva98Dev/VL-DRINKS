@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - VL-DRINKS</title>
     @Styles.Render("~/Content/css")
-    @* No cargamos DataTables ni el layout del admin (scripts.js) aquí *@
 </head>
 <body>
 
@@ -20,7 +19,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
-    @* Mensaje "SESION CERRADA CORRECTAMENTE" *@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -30,7 +28,7 @@
         $(document).ready(function () {
             Swal.fire({
                 title: '¡Sesión Cerrada!',
-                text: '@Html.Raw(TempData["Notification"])', // Lee el mensaje
+                text: '@Html.Raw(TempData["Notification"])', 
                 icon: 'success',
                 timer: 3000,
                 toast: true,

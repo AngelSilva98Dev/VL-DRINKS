@@ -106,9 +106,8 @@ namespace CAPAPRESENTACION.Controllers
             string mensajeError = string.Empty;
             CN_Usuarios objNegocio = new CN_Usuarios();
 
-            // --- PRÓXIMO PASO: ---
             // Llamaremos a la CapaNegocio. El método 'SolicitarReestablecimiento'
-            // que está aquí abajo todavía no existe. Lo crearemos en el siguiente paso.
+
             bool resultado = objNegocio.SolicitarReestablecimiento(email, out mensajeError);
 
             // Devolvemos una respuesta JSON que el JavaScript pueda entender

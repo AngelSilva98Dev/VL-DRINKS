@@ -11,9 +11,23 @@ namespace CAPAPRESENTACION.Controllers
     [Authorize]
     public class HomeController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(string estado) 
         {
-            return View();
+
+            CN_Pedidos objCN_Pedidos = new CN_Pedidos();
+
+
+            if (string.IsNullOrEmpty(estado))
+            {
+                estado = "Esperando Comprobante";
+            }
+
+            List<Pedido> listaPedidos = objCN_Pedidos.Listar(estado);
+
+
+            ViewBag.EstadoActual = estado;
+
+            return View(listaPedidos);
         }
 
         public ActionResult Usuarios()
@@ -121,6 +135,17 @@ namespace CAPAPRESENTACION.Controllers
                 idUsuarioLogueado, 
                 esAdminLogueado, 
                 out mensaje);
+
+            return Json(new { operacionExitosa = resultado, mensaje = mensaje });
+        }
+
+        [HttpPost]
+        public JsonResult CambiarEstado(int idPedido, string nuevoEstado)
+        {
+            string mensaje = string.Empty;
+            CN_Pedidos objNegocio = new CN_Pedidos();
+
+            bool resultado = objNegocio.CambiarEstado(idPedido, nuevoEstado, out mensaje);
 
             return Json(new { operacionExitosa = resultado, mensaje = mensaje });
         }

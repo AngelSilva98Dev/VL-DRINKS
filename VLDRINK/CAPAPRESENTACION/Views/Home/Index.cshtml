@@ -1,33 +1,216 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model List<CapaEntidad.Pedido>
+@{
+    ViewBag.Title = "Pedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    var estados = new Dictionary<string, string> {
+        { "Esperando Comprobante", "secondary" }, // Gris
+        { "En Preparacion", "light text-dark border" }, // Blanco
+        { "Enviado", "info" },                   // Verde Claro (usamos 'info')
+        { "Completado", "success" },             // Verde Oscuro
+        { "Reclamo", "warning" },                // Naranja
+        { "Error", "danger" }                    // Rojo
+    };
+
+    var estadosDropdown = new List<string> {
+        "Esperando Comprobante",
+        "En Preparacion",
+        "Enviado",
+        "Completado",
+        "Reclamo",
+        "Error"
+    };
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<h1 class="mt-4">Pedidos</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Gestión de Pedidos</li>
+</ol>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+<ul class="nav nav-tabs" id="pedidosTabs" role="tablist">
+    @foreach (var kvp in estados)
+    {
+        string estado = kvp.Key;
+        string color = kvp.Value;
+        bool esActivo = (estado == "Esperando Comprobante");
+
+        <li class="nav-item" role="presentation">
+            <a class="nav-link @(esActivo ? "active" : "")
+                      @(esActivo ? "border-bottom-3 border-" + color.Split(' ')[0] : "")"
+               id="tab-@estado.Replace(" ", "")"
+               data-bs-toggle="tab"
+               href="#tab-content"
+               data-estado="@estado"
+               role="tab">
+                @estado
+            </a>
+        </li>
+    }
+</ul>
+<div class="tab-content" id="tab-content">
+    <div class="tab-pane fade show active" role="tabpanel">
+        <div class="row mt-4" id="pedidos-container" style="min-height: 300px;">
+        </div>
     </div>
-</main>
+</div>
+
+<div id="plantilla-cuadro" class="col-xl-3 col-md-6 mb-4" style="display: none;">
+    <div class="card shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-uppercase mb-1">
+                        Pedido #<span class="pedido-id">0</span> (<span class="pedido-metodo"></span>)
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800 pedido-contacto">
+                        Nombre Contacto
+                    </div>
+                    <div class="text-xs font-weight-bold text-gray-700 mt-1 pedido-fecha">
+                        Fecha
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-file-invoice-dollar fa-2x text-gray-300"></i>
+                </div>
+            </div>
+            <hr class="my-2">
+            <div class="mt-2 mb-0 text-gray-800">
+                <strong>Total: $<span class="pedido-total">0.00</span></strong>
+            </div>
+
+            <div class="mt-3">
+                <label class="form-label-sm">Cambiar Estado:</label>
+                <select class="form-select form-select-sm change-status">
+                    @foreach (var estado in estadosDropdown)
+                    {
+                        <option value="@estado">@estado</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            var coloresEstado = {
+                "Esperando Comprobante": "secondary",
+                "En Preparacion": "light text-dark border",
+                "Enviado": "info",
+                "Completado": "success",
+                "Reclamo": "warning",
+                "Error": "danger"
+            };
+
+            var estadoActual = "Esperando Comprobante"; 
+            var timer; 
+
+
+            function cargarPedidos(estado) {
+         
+                estadoActual = estado;
+
+
+                $("#pedidos-container").html('<div class="col-12 text-center mt-5"><div class="spinner-border" role="status"></div><p>Cargando...</p></div>');
+
+                $.ajax({
+                    url: '@Url.Action("ListarPedidos", "Home")',
+                    type: "GET",
+                    data: { estado: estado },
+                    dataType: "json",
+                    success: function (response) {
+                        $("#pedidos-container").empty();
+
+                        if (response.data.length === 0) {
+                            $("#pedidos-container").html('<div class="col-12"><div class="alert alert-success" role="alert"><i class="fas fa-check-circle"></i> ¡Excelente! No hay pedidos en este estado.</div></div>');
+                            return;
+                        }
+
+      
+                        $.each(response.data, function (index, pedido) {
+                     
+                            var cuadro = $("#plantilla-cuadro").clone();
+                            cuadro.removeAttr("id"); 
+
+                  
+                            cuadro.find(".pedido-id").text(pedido.IdPedido);
+                            cuadro.find(".pedido-metodo").text(pedido.MetodoPago);
+                            cuadro.find(".pedido-contacto").text(pedido.Contacto);
+                            cuadro.find(".pedido-total").text(pedido.MontoTotal.toFixed(2));
+
+                            var fecha = new Date(parseInt(pedido.FechaPedido.substr(6)));
+                            cuadro.find(".pedido-fecha").text(fecha.toLocaleString("es-AR"));
+
+                            var select = cuadro.find(".change-status");
+                            select.val(pedido.Estado);
+                            select.data("idpedido", pedido.IdPedido); 
+
+                            var colorBorde = coloresEstado[pedido.Estado].split(' ')[0] || "dark";
+                            cuadro.find(".card").addClass("border-left-" + colorBorde);
+                            cuadro.find(".text-uppercase").addClass("text-" + colorBorde);
+
+                            cuadro.appendTo("#pedidos-container").show();
+                        });
+                    }
+                });
+            }
+
+            $('#pedidosTabs a[data-bs-toggle="tab"]').on('click', function (e) {
+                var estado = $(this).data('estado');
+
+                $('#pedidosTabs a').removeClass(function (index, className) {
+                    return (className.match (/(^|\s)border-\S+/g) || []).join(' ');
+                });
+                var color = coloresEstado[estado].split(' ')[0] || "dark";
+                $(this).addClass("border-bottom-3 border-" + color);
+
+                cargarPedidos(estado);
+            });
+
+            $('#pedidos-container').on('change', '.change-status', function () {
+                var idPedido = $(this).data('idpedido');
+                var nuevoEstado = $(this).val();
+
+                Swal.fire({
+                    title: '¿Cambiar Estado?',
+                    text: `¿Deseas cambiar el pedido #${idPedido} al estado "${nuevoEstado}"?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, cambiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '@Url.Action("CambiarEstado", "Home")',
+                            type: "POST",
+                            data: { idPedido: idPedido, nuevoEstado: nuevoEstado },
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.operacionExitosa) {
+                                    Swal.fire('¡Actualizado!', 'El estado del pedido ha sido cambiado.', 'success');
+                                    cargarPedidos(estadoActual);
+                                } else {
+                                    Swal.fire('Error', response.mensaje, 'error');
+                                    cargarPedidos(estadoActual); 
+                                }
+                            }
+                        });
+                    } else {
+                        cargarPedidos(estadoActual);
+                    }
+                });
+            });
+
+
+            cargarPedidos("Esperando Comprobante");
+        
+            setInterval(function () {
+                cargarPedidos(estadoActual);
+            }, 30000); 
+
+        });
+    </script>
+}

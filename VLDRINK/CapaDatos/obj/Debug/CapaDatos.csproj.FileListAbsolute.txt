@@ -7,3 +7,5 @@ D:\PROGRAMACION\TP FINAL\VLDRINK\CapaDatos\obj\Debug\CapaDatos.csproj.CoreCompil
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaDatos\obj\Debug\CapaDatos.csproj.Up2Date
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaDatos\obj\Debug\CapaDatos.dll
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaDatos\obj\Debug\CapaDatos.pdb
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaDatos\bin\Debug\PagedList.dll
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaDatos\bin\Debug\PagedList.xml

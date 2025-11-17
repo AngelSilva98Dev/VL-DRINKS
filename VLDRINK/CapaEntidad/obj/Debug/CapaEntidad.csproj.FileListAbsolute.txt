@@ -6,3 +6,7 @@ D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\obj\Debug\CapaEntidad.csproj.CoreCo
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\obj\Debug\CapaEnti.526B9C87.Up2Date
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\obj\Debug\CapaEntidad.dll
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\obj\Debug\CapaEntidad.pdb
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\bin\Debug\PagedList.dll
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\bin\Debug\PagedList.Mvc.dll
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\bin\Debug\PagedList.xml
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaEntidad\bin\Debug\PagedList.Mvc.xml

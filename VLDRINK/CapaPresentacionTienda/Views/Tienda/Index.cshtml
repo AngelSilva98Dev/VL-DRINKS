@@ -1,0 +1,123 @@
+﻿@model CapaEntidad.TiendaViewModel
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Tienda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string categoriaActual = (string)ViewBag.CategoriaActual;
+}
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">VL-DRINKS</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Encuentra las mejores bebidas</p>
+        </div>
+    </div>
+</header>
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h4 class="mb-3">Categorías</h4>
+                <div class="list-group">
+
+                    <a href="@Url.Action("Index", "Tienda", new { pagina = 1, categoria = "all" })"
+                       class="list-group-item list-group-item-action @(categoriaActual == "all" ? "active" : "")">
+                        Mostrar Todas
+                    </a>
+
+                    @foreach (var categoria in Model.Categorias)
+                    {
+                        <a href="@Url.Action("Index", "Tienda", new { pagina = 1, categoria = categoria.Descripcion })"
+                           class="list-group-item list-group-item-action @(categoriaActual == categoria.Descripcion ? "active" : "")">
+                            @categoria.Descripcion
+                        </a>
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div id="producto-grid" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                    @foreach (var producto in Model.Productos)
+                    {
+                        <div class="col mb-5 product-card" data-categoria-producto="@producto.objCategoria.Descripcion">
+                            <div class="card h-100">
+                                <a href="@Url.Action("DetalleProducto", "Tienda", new { id = producto.IdProducto })">
+                                    <img class="card-img-top" style="height: 200px; object-fit: cover;" src="data:image/jpeg;base64,@producto.Imagen" alt="@producto.Nombre" />
+                                </a>
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <h5 class="fw-bolder">
+                                            <a href="@Url.Action("DetalleProducto", "Tienda", new { id = producto.IdProducto })" style="text-decoration: none; color: inherit;">
+                                                @producto.Nombre
+                                            </a>
+                                        </h5>
+                                        $@producto.Precio
+                                    </div>
+                                </div>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <button class="btn btn-outline-dark mt-auto btn-agregar-carrito" data-idproducto="@producto.IdProducto">
+                                            Agregar (1)
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    @Html.PagedListPager(Model.Productos, pagina => Url.Action("Index", "Tienda", new { pagina, categoria = categoriaActual }),
+                        new PagedListRenderOptions
+                        {
+                            UlElementClasses = new[] { "pagination", "justify-content-center" },
+                            LiElementClasses = new[] { "page-item" }
+                        })
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+            $("#producto-grid").on("click", ".btn-agregar-carrito", function () {
+
+                var idProducto = $(this).data("idproducto");
+                var cantidad = 1;
+                var btn = $(this);
+                btn.prop("disabled", true).text("Agregando...");
+
+                $.ajax({
+                    url: '@Url.Action("AgregarAlCarrito", "Tienda")',
+                    type: "POST",
+                    data: { idProducto: idProducto, cantidad: cantidad },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            alert("¡Añadido!");
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("Error: No se pudo contactar al servidor.");
+                    },
+                    complete: function () {
+                        btn.prop("disabled", false).text("Agregar (1)");
+                    }
+                });
+            });
+
+        });
+    </script>
+}

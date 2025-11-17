@@ -16,6 +16,10 @@ namespace CapaEntidad
         public string Correo { get; set; }
         public bool Reestablecer { get; set; }
         public DateTime FechaRegistro { get; set; } 
+        public string Telefono { get; set; }
+        public string Direccion { get; set; }
+        public bool EsMayorDeEdad { get; set; }
+
 
         [MaxLength(20)]
         public byte[] PasswordHash { get; set; }

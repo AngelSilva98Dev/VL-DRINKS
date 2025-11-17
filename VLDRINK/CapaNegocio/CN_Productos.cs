@@ -8,9 +8,9 @@ namespace CapaNegocio
     {
         private CD_Productos objCapaDato = new CD_Productos();
 
-        public List<Producto> Listar()
+        public List<Producto> Listar(bool incluirImagen = false)
         {
-            return objCapaDato.Listar();
+            return objCapaDato.Listar(incluirImagen);
         }
 
         public int Registrar(Producto obj, out string Mensaje)
@@ -74,5 +74,6 @@ namespace CapaNegocio
         {
             return objCapaDato.ObtenerProducto(id);
         }
+
     }
 }

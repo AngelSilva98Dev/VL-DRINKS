@@ -8,12 +8,11 @@ namespace CapaNegocio
 {
     public class CN_Clientes
     {
-
         private CD_Clientes objCapaDato = new CD_Clientes();
-
         public Cliente ValidarCliente(string correo, string clave, out string Mensaje)
         {
             Mensaje = string.Empty;
+
             Cliente cliente = objCapaDato.ObtenerClientePorCorreo(correo);
 
             if (cliente == null)
@@ -22,7 +21,6 @@ namespace CapaNegocio
                 return null;
             }
 
-
             bool esValido = PasswordHasher.VerifyPassword(clave, cliente.PasswordHash, cliente.PasswordSalt);
 
             if (!esValido)
@@ -30,25 +28,34 @@ namespace CapaNegocio
                 Mensaje = "Credenciales inválidas.";
                 return null;
             }
-
             return cliente;
         }
-
         public int Registrar(Cliente obj, out string Mensaje)
         {
-            // (Aquí puedes añadir validaciones: que el correo no exista, etc.)
+            Mensaje = string.Empty;
 
+
+            Cliente clienteExistente = objCapaDato.ObtenerClientePorCorreo(obj.Correo);
+            if (clienteExistente != null)
+            {
+                Mensaje = "Error: El correo electrónico ya está registrado.";
+                return 0; 
+            }
 
             string passwordEnTexto = Encoding.UTF8.GetString(obj.PasswordHash);
-
 
             var (hash, salt) = PasswordHasher.HashPassword(passwordEnTexto);
 
             obj.PasswordHash = hash;
             obj.PasswordSalt = salt;
-            obj.Reestablecer = false;
+            obj.Reestablecer = false; 
 
             return objCapaDato.Registrar(obj, out Mensaje);
+        }
+        public Cliente ObtenerClientePorId(int idCliente)
+        {
+
+            return objCapaDato.ObtenerClientePorId(idCliente);
         }
     }
 }

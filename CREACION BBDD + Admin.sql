@@ -173,3 +173,113 @@ BEGIN
     PRINT 'La columna "FechaUltimoReinicio" ya existía.';
 END
 GO
+
+CREATE TABLE dbo.PEDIDO (
+    IdPedido      INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    
+    -- Clave foránea (opcional) a la tabla CLIENTE
+    IdCliente     INT NULL, 
+    
+    TotalProducto INT NOT NULL,
+    MontoTotal    DECIMAL(10, 2) NOT NULL,
+    
+    -- Datos del comprador (para invitados)
+    Contacto      VARCHAR(100) NULL,
+    Telefono      VARCHAR(50) NULL,
+    Direccion     VARCHAR(500) NULL,
+
+    -- Lógica de Pago y Estado
+    MetodoPago    VARCHAR(50) NOT NULL,
+    Estado        VARCHAR(50) NOT NULL DEFAULT 'Esperando Comprobante', -- Estado inicial
+    
+    FechaPedido   DATETIME DEFAULT GETDATE() NULL,
+
+    -- Define la relación con la tabla CLIENTE
+    CONSTRAINT FK_Pedido_Cliente 
+        FOREIGN KEY (IdCliente) REFERENCES dbo.CLIENTE(IdCliente)
+        ON DELETE SET NULL -- Si se borra el cliente, el pedido queda (como invitado)
+);
+GO
+PRINT 'Tabla PEDIDO creada.'
+GO
+
+/*
+ * ============================================
+ * 2. TABLA DE DETALLE_PEDIDO
+ * ============================================
+ * Guarda las líneas de productos para cada pedido.
+ */
+CREATE TABLE dbo.DETALLE_PEDIDO (
+    IdDetallePedido INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    
+    -- Clave foránea que conecta con el pedido
+    IdPedido        INT NOT NULL,
+    
+    -- Clave foránea que conecta con el producto
+    IdProducto      INT NOT NULL,
+    
+    -- Guardamos una "foto" de los datos al momento de la compra
+    NombreProducto  VARCHAR(100) NOT NULL,
+    Cantidad        INT NOT NULL,
+    PrecioUnitario  DECIMAL(10, 2) NOT NULL,
+    Total           DECIMAL(10, 2) NOT NULL,
+
+    -- Define la relación con la tabla PEDIDO
+    CONSTRAINT FK_Detalle_Pedido 
+        FOREIGN KEY (IdPedido) REFERENCES dbo.PEDIDO(IdPedido)
+        ON DELETE CASCADE, -- Si se borra el pedido, se borran los detalles
+        
+    -- Define la relación con la tabla PRODUCTO
+    CONSTRAINT FK_Detalle_Producto 
+        FOREIGN KEY (IdProducto) REFERENCES dbo.PRODUCTO(IdProducto)
+        ON DELETE NO ACTION -- NO dejes borrar un producto si está en un pedido
+);
+GO
+PRINT 'Tabla DETALLE_PEDIDO creada.'
+GO
+
+-- 1. Esperando Comprobante (Gris)
+INSERT INTO PEDIDO (
+    TotalProducto, MontoTotal, Contacto, Telefono, Direccion, MetodoPago, Estado, FechaPedido
+) VALUES (
+    2, 3500.50, 'Juan Perez (Prueba)', '351000111', 'Calle Falsa 123', 'Transferencia', 'Esperando Comprobante', GETDATE() - 0.1
+);
+
+-- 2. En Preparacion (Blanco)
+INSERT INTO PEDIDO (
+    TotalProducto, MontoTotal, Contacto, Telefono, Direccion, MetodoPago, Estado, FechaPedido
+) VALUES (
+    1, 1200.00, 'Maria Garcia (Prueba)', '351000222', 'Av. Siempre Viva 742', 'Efectivo', 'En Preparacion', GETDATE() - 0.2
+);
+
+-- 3. Enviado (Verde Claro / Info)
+INSERT INTO PEDIDO (
+    TotalProducto, MontoTotal, Contacto, Telefono, Direccion, MetodoPago, Estado, FechaPedido
+) VALUES (
+    5, 10200.00, 'Carlos Lopez (Prueba)', '351000333', 'Boulevard 456', 'Transferencia', 'Enviado', GETDATE() - 1
+);
+
+-- 4. Completado (Verde Oscuro / Success)
+INSERT INTO PEDIDO (
+    TotalProducto, MontoTotal, Contacto, Telefono, Direccion, MetodoPago, Estado, FechaPedido
+) VALUES (
+    1, 800.00, 'Ana Martinez (Prueba)', '351000444', 'Calle Verdadera 789', 'Efectivo', 'Completado', GETDATE() - 2
+);
+
+-- 5. Reclamo (Naranja / Warning)
+INSERT INTO PEDIDO (
+    TotalProducto, MontoTotal, Contacto, Telefono, Direccion, MetodoPago, Estado, FechaPedido
+) VALUES (
+    3, 4500.00, 'Luis Fernandez (Prueba)', '351000555', 'Camino 001', 'Transferencia', 'Reclamo', GETDATE() - 3
+);
+
+-- 6. Error (Rojo / Danger)
+INSERT INTO PEDIDO (
+    TotalProducto, MontoTotal, Contacto, Telefono, Direccion, MetodoPago, Estado, FechaPedido
+) VALUES (
+    1, 0.00, 'Sistema (Prueba Error)', 'N/A', 'N/A', 'Error', 'Error', GETDATE() - 4
+);
+GO
+
+PRINT 'Se han insertado 6 pedidos de prueba con diferentes estados.'
+GO

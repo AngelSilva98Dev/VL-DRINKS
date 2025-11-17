@@ -1,0 +1,93 @@
+﻿@model CapaEntidad.Carrito
+@{
+    ViewBag.Title = "Carrito de Compras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <h2>@ViewBag.Title</h2>
+
+    @if (Model.Items.Count > 0)
+    {
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @item.objProducto.Nombre
+                        </td>
+                        <td>$@item.objProducto.Precio</td>
+                        <td>@item.Cantidad</td>
+                        <td>$@item.Subtotal</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm btn-eliminar"
+                                    data-idproducto="@item.objProducto.IdProducto">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                    <td><strong>$@Model.CalcularTotal()</strong></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="d-flex justify-content-between">
+            <a href="@Url.Action("Index", "Tienda")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Seguir Comprando
+            </a>
+            <a href="@Url.Action("Checkout", "Pedido")" class="btn btn-success btn-lg">
+                Finalizar Compra <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">Tu carrito está vacío.</div>
+        <a href="@Url.Action("Index", "Tienda")" class="btn btn-primary">
+            Ir a la Tienda
+        </a>
+    }
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".btn-eliminar").on("click", function () {
+                var idProducto = $(this).data("idproducto");
+
+                $.ajax({
+                    url: '@Url.Action("EliminarDelCarrito", "Tienda")',
+                    type: "POST",
+                    data: { idProducto: idProducto },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert("Error al eliminar el producto.");
+                    }
+                });
+            });
+        });
+    </script>
+}

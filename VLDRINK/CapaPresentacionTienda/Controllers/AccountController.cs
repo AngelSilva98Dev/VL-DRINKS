@@ -9,53 +9,71 @@ namespace CapaPresentacionTienda.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: /Account/Login
+        private Carrito GetCarrito()
+        {
+            Carrito carrito = (Carrito)Session["Carrito"];
+            if (carrito == null)
+            {
+                carrito = new Carrito();
+                Session["Carrito"] = carrito;
+            }
+            return carrito;
+        }
+
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
-        // POST: /Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
         {
+            Carrito carritoTemporal = GetCarrito();
+
             string mensajeError;
-            // Usamos la nueva capa de negocio
             CN_Clientes objNegocio = new CN_Clientes();
 
-            // Validamos al Cliente
             Cliente cliente = objNegocio.ValidarCliente(email, password, out mensajeError);
 
             if (cliente == null)
             {
                 ViewBag.Error = mensajeError;
-                return View();
+                return View(); 
             }
 
-            // --- Autenticación para el Cliente ---
-            // Puedes usar una variable de Sesión diferente
-            // para no mezclarla con la del admin
+            FormsAuthentication.SetAuthCookie(cliente.Correo, false);
+
             Session["ClienteCorreo"] = cliente.Correo;
+            Session["ClienteId"] = cliente.IdCliente;
 
-            // (O si usas FormsAuthentication, puedes darle un rol)
-            // FormsAuthentication.SetAuthCookie(cliente.Correo, false);
+            
+            if (carritoTemporal != null && carritoTemporal.Items.Count > 0)
+            {
+                Session["Carrito"] = carritoTemporal;
+            }
 
-            return RedirectToAction("Index", "Home"); // Redirige a la Home de la Tienda
+            return RedirectToAction("Index", "Tienda");
         }
 
-        // GET: /Account/Registrar
         public ActionResult Registrar()
         {
             return View();
         }
 
-        // POST: /Account/Registrar
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registrar(string nombres, string apellidos, string email, string password)
+        public ActionResult Registrar(string nombres, string apellidos, string email, string password, bool esMayor)
         {
             string mensajeError = string.Empty;
+
+            if (!esMayor)
+            {
+                ViewBag.Error = "Debe confirmar que es mayor de 18 años para registrarse.";
+                return View();
+            }
+
             CN_Clientes objNegocio = new CN_Clientes();
 
             Cliente nuevoCliente = new Cliente()
@@ -79,15 +97,10 @@ namespace CapaPresentacionTienda.Controllers
             }
         }
 
-        // GET: /Account/LogOut
         public ActionResult LogOut()
         {
-            // Limpia la sesión del cliente
             Session.Remove("ClienteCorreo");
-            // Opcional: Limpia toda la sesión
-            // Session.Clear(); 
 
-            // FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
     }
