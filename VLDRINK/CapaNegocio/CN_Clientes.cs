@@ -118,20 +118,14 @@ namespace CapaNegocio
         }
         private bool EnviarEmail(string correo, string asunto, string cuerpoHtml)
         {
+
             try
             {
-                System.Diagnostics.Debug.WriteLine("========================================");
-                System.Diagnostics.Debug.WriteLine("--- SIMULACIÓN DE ENVÍO DE EMAIL (TIENDA) ---");
-                System.Diagnostics.Debug.WriteLine($"Para: {correo}");
-                System.Diagnostics.Debug.WriteLine($"Asunto: {asunto}");
-                System.Diagnostics.Debug.WriteLine($"Cuerpo: {cuerpoHtml}");
-                System.Diagnostics.Debug.WriteLine("========================================");
-
-                return true; 
+                return ServicioEmail.Enviar(correo, asunto, cuerpoHtml);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error al simular email: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Error al llamar a ServicioEmail: {ex.Message}");
                 return false;
             }
         }
