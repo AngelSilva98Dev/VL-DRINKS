@@ -13,3 +13,5 @@ D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\obj\Debug\CapaNegocio.dll
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\obj\Debug\CapaNegocio.pdb
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\PagedList.dll
 D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\PagedList.xml
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\Newtonsoft.Json.dll
+D:\PROGRAMACION\TP FINAL\VLDRINK\CapaNegocio\bin\Debug\Newtonsoft.Json.xml

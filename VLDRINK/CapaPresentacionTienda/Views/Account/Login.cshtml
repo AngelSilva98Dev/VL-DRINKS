@@ -1,68 +1,146 @@
 ﻿@{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    Layout = null; // <-- Página independiente
 }
 
-<div id="layoutAuthentication">
-    <div id="layoutAuthentication_content">
-        <main>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-5">
-                        <div class="card shadow-lg border-0 rounded-lg mt-5">
-                            <div class="card-header"><h3 class="text-center font-weight-light my-4">Ingreso</h3></div>
-                            <div class="card-body">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - VL-DRINKS Tienda</title>
 
-                                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
-                                {
-                                    @Html.AntiForgeryToken()
+    @Styles.Render("~/Content/css") 
+</head>
+<body class="bg-primary">
+    <div id="layoutAuthentication">
+        
+        <div id="layoutAuthentication_content" class="min-vh-100">
+            <main class="flex-grow-1">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Ingreso</h3></div>
+                                <div class="card-body">
 
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email" required />
-                                        <label for="inputEmail">Correo Electronico</label>
-                                    </div>
-
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" required />
-                                        <label for="inputPassword">Contraseña</label>
-                                    </div>
-
-                                    if (ViewBag.Error != null)
+                                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
                                     {
-                                        <div class="alert alert-danger" role="alert">
-                                            @ViewBag.Error
+                                        @Html.AntiForgeryToken()
+                                        
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email" required />
+                                            <label for="inputEmail">Correo Electronico</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" required />
+                                            <label for="inputPassword">Contraseña</label>
+                                        </div>
+
+                                        if (ViewBag.Error != null)
+                                        {
+                                            <div class="alert alert-danger" role="alert">
+                                                @ViewBag.Error
+                                            </div>
+                                        }
+
+                                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                            <a href="#" class="small" data-bs-toggle="modal" data-bs-target="#RecuperarModal">
+                                                ¿Olvidaste tu contraseña?
+                                            </a>
+                                            <button type="submit" class="btn btn-primary">Ingresar</button>
                                         </div>
                                     }
-
-                                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="#">Recuperar Contraseña</a>
-                                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                                </div>
+                                <div class="card-footer text-center py-3">
+                                    <div class="small">
+                                        <a href="@Url.Action("Registrar", "Account")">¿No tienes cuenta? ¡Regístrate!</a>
                                     </div>
-                                }
-                            </div>
-                            <div class="card-footer text-center py-3">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
+            </main>
+        </div>
+        
+        <div id="layoutAuthentication_footer">
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
-</div>
 
-</div>
-    <<div id="layoutAuthentication_footer">
-    <footer class="py-4 bg-light mt-auto">
-        <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Copyright © Your Website 2023</div>
-                <div>
-                    <a href="#">Privacy Policy</a>
-                    &middot;
-                    <a href="#">Terms & Conditions</a>
+    <div class="modal fade" id="RecuperarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Recuperar Contraseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formRecuperar">
+                        <div class="small mb-3 text-muted">
+                            Ingresa tu correo electrónico y te enviaremos una nueva contraseña.
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="inputEmailRecuperar" type="email" placeholder="name@example.com" name="email" required />
+                            <label for="inputEmailRecuperar">Correo Electrónico</label>
+                        </div>
+
+                        <div id="modalRecuperarError" class="alert alert-danger d-none" role="alert"></div>
+                        <div id="modalRecuperarExito" class="alert alert-success d-none" role="alert"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnEnviarRecuperacion">Reestablecer</button>
                 </div>
             </div>
         </div>
-    </footer>
     </div>
-</div>
+    
+    @Scripts.Render("~/bundles/jquery")
+    
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script>
+        $(document).ready(function () {
+
+            $("#btnEnviarRecuperacion").on("click", function () {
+                
+                $("#modalRecuperarError").addClass("d-none");
+                $("#modalRecuperarExito").addClass("d-none");
+
+                var email = $("#inputEmailRecuperar").val();
+
+                $.ajax({
+                    url: '@Url.Action("SolicitarReestablecimiento", "Account")',
+                    type: "POST",
+                    data: { email: email },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.operacionExitosa) {
+                            $("#modalRecuperarExito").text(response.mensaje);
+                            $("#modalRecuperarExito").removeClass("d-none");
+                        } else {
+                            $("#modalRecuperarError").text(response.mensaje);
+                            $("#modalRecuperarError").removeClass("d-none");
+                        }
+                    },
+                    error: function () {
+                        $("#modalRecuperarError").text("Error de conexión. Intente de nuevo.");
+                        $("#modalRecuperarError").removeClass("d-none");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

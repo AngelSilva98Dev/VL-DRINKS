@@ -97,13 +97,14 @@ namespace CapaDatos
             using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
             {
                 string queryInsertPedido = @"
-                    INSERT INTO PEDIDO (IdCliente, TotalProducto, MontoTotal, Contacto, Telefono, Direccion, MetodoPago, Estado, FechaPedido) 
-                    VALUES (@IdCliente, @TotalProducto, @MontoTotal, @Contacto, @Telefono, @Direccion, @MetodoPago, @Estado, GETDATE());
-                    SELECT SCOPE_IDENTITY();";
+            INSERT INTO PEDIDO (IdCliente, TotalProducto, Subtotal, CostoEnvio, MontoTotal, Contacto, Telefono, Direccion, MetodoPago, Estado, FechaPedido) 
+            VALUES 
+            (@IdCliente, @TotalProducto, @Subtotal, @CostoEnvio, @MontoTotal, @Contacto, @Telefono, @Direccion, @MetodoPago, @Estado, GETDATE());
+            SELECT SCOPE_IDENTITY();";
 
-                string queryInsertDetalle = @"
-                    INSERT INTO DETALLE_PEDIDO (IdPedido, IdProducto, NombreProducto, Cantidad, PrecioUnitario, Total)
-                    VALUES (@IdPedido, @IdProducto, @NombreProducto, @Cantidad, @PrecioUnitario, @Total);";
+                string queryInsertDetalle = @"INSERT INTO DETALLE_PEDIDO(IdPedido, IdProducto, NombreProducto, Cantidad, PrecioUnitario, Total)
+            VALUES
+            (@IdPedido, @IdProducto, @NombreProducto, @Cantidad, @PrecioUnitario, @Total);";
 
                 SqlTransaction transaction = null;
 
@@ -116,6 +117,8 @@ namespace CapaDatos
 
                     cmdPedido.Parameters.AddWithValue("@IdCliente", objPedido.objCliente.IdCliente);
                     cmdPedido.Parameters.AddWithValue("@TotalProducto", objPedido.TotalProducto);
+                    cmdPedido.Parameters.AddWithValue("@Subtotal", objPedido.Subtotal);
+                    cmdPedido.Parameters.AddWithValue("@CostoEnvio", objPedido.CostoEnvio);
                     cmdPedido.Parameters.AddWithValue("@MontoTotal", objPedido.MontoTotal);
                     cmdPedido.Parameters.AddWithValue("@Contacto", objPedido.Contacto);
                     cmdPedido.Parameters.AddWithValue("@Telefono", objPedido.Telefono);
@@ -125,10 +128,10 @@ namespace CapaDatos
 
                     idPedidoGenerado = Convert.ToInt32(cmdPedido.ExecuteScalar());
 
-
                     foreach (DetallePedido detalle in listaDetallePedido)
                     {
                         SqlCommand cmdDetalle = new SqlCommand(queryInsertDetalle, objConexion, transaction);
+
                         cmdDetalle.Parameters.AddWithValue("@IdPedido", idPedidoGenerado);
                         cmdDetalle.Parameters.AddWithValue("@IdProducto", detalle.objProducto.IdProducto);
                         cmdDetalle.Parameters.AddWithValue("@NombreProducto", detalle.NombreProducto);
@@ -144,20 +147,18 @@ namespace CapaDatos
                 catch (Exception ex)
                 {
                     if (transaction != null)
-                    {
                         transaction.Rollback();
-                    }
+
                     idPedidoGenerado = 0;
                     Mensaje = "Error al registrar el pedido: " + ex.Message;
                 }
                 finally
                 {
                     if (objConexion.State == ConnectionState.Open)
-                    {
                         objConexion.Close();
-                    }
                 }
             }
+
             return idPedidoGenerado;
         }
     }

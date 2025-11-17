@@ -1,58 +1,183 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewBag.Title - VL DRINKS</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
-            @Html.ActionLink("Nombre de la aplicación", "Index", "Tienda", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+
+            @* Logo *@
+            <a class="navbar-brand py-0" href="@Url.Action("Index", "Tienda")">
+                <img src="@Url.Content("~/Content/imagenes/Logo2PNG.png")"
+                     alt="Logo VL-DRINKS"
+                     style="height: 45px;" />
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
+
+                <ul class="navbar-nav flex-grow-1"></ul>
+
+                @* BOTÓN DEL CARRITO *@
+                <form class="d-flex me-3" action="@Url.Action("Carrito", "Tienda")">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="bi bi-cart-fill me-1"></i>
+                        Carrito
+                        <span id="carrito-conteo"
+                              class="badge bg-success text-white ms-1 rounded-pill">
+                            @((Session["Carrito"] as CapaEntidad.Carrito)?.Items.Count ?? 0)
+                        </span>
+                    </button>
+                </form>
+
+                @* MENÚ DE USUARIO *@
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUsuario"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-fill"></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUsuario">
+
+                            @if (Session["ClienteCorreo"] != null)
+                            {
+                                <li><a class="dropdown-item disabled">¡Hola, @Session["ClienteCorreo"]!</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="@Url.Action("LogOut", "Account")">Cerrar Sesión</a></li>
+                            }
+                            else
+                            {
+                                <li><a class="dropdown-item" href="@Url.Action("Login", "Account")">Iniciar Sesión</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Registrar", "Account")">Registrarse</a></li>
+                            }
+                        </ul>
+
+                    </li>
                 </ul>
 
-                <ul class="navbar-nav">
-                    @if (Session["ClienteCorreo"] != null)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">¡Hola, @(Session["ClienteCorreo"].ToString())!</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("LogOut", "Account")">Cerrar Sesión</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Login", "Account")">Iniciar Sesión</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Registrar", "Account")">Registrarse</a>
-                        </li>
-                    }
-                </ul>
             </div>
         </div>
     </nav>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        <footer class="text-center text-muted mb-3">
+            &copy; @DateTime.Now.Year - VL DRINKS
         </footer>
     </div>
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+        <div id="toastCarrito"
+             class="toast text-white bg-success border-0"
+             role="alert" aria-live="assertive" aria-atomic="true">
+
+            <div class="d-flex">
+                <div class="toast-body" id="toastCarritoMensaje">
+                    Producto añadido al carrito
+                </div>
+
+                <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
+
+@section scripts {
+    <script>
+    $(document).ready(function () {
+
+        var toastCarrito = new bootstrap.Toast(document.getElementById('toastCarrito'));
+
+        $("#producto-grid").on("click", ".btn-agregar-carrito", function () {
+
+            var btn = $(this);
+            var idProducto = btn.data("idproducto");
+            var cantidad = 1;
+
+            btn.prop("disabled", true).text("Agregando...");
+
+            $.ajax({
+                url: '@Url.Action("AgregarAlCarrito", "Tienda")',
+                type: "POST",
+                data: { idProducto: idProducto, cantidad: cantidad },
+                dataType: "json",
+
+                success: function (response) {
+
+                    if (response.success) {
+
+                        $("#toastCarritoMensaje").text("¡Producto añadido!");
+                        toastCarrito.show();
+
+                        $("#carrito-conteo").text(response.totalItems);
+
+                        $("#carrito-conteo")
+                            .fadeOut(150).fadeIn(150)
+                            .css("transform", "scale(1.3)")
+                            .delay(150)
+                            .queue(function (next) {
+                                $(this).css("transform", "scale(1)");
+                                next();
+                            });
+
+                        if (response.sinStock === true) {
+                            btn.prop("disabled", true).text("Sin stock");
+                        }
+
+                    } else {
+                        $("#toastCarritoMensaje").text(response.message);
+                        $("#toastCarrito").removeClass("bg-success").addClass("bg-danger");
+                        toastCarrito.show();
+                    }
+                },
+
+                error: function () {
+                    $("#toastCarritoMensaje").text("Error: no se pudo contactar al servidor.");
+                    $("#toastCarrito").removeClass("bg-success").addClass("bg-danger");
+                    toastCarrito.show();
+                },
+
+                complete: function () {
+                    if (!btn.prop("disabled")) {
+                        btn.text("Agregar (1)");
+                    }
+                }
+            });
+        });
+
+    });
+    </script>
+}

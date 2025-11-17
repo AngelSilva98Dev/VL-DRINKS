@@ -101,7 +101,28 @@ namespace CapaPresentacionTienda.Controllers
         {
             Session.Remove("ClienteCorreo");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Tienda");
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult SolicitarReestablecimiento(string email)
+        {
+            string mensajeError = string.Empty;
+
+            CN_Clientes objNegocio = new CN_Clientes();
+
+ 
+            bool resultado = objNegocio.SolicitarReestablecimiento(email, out mensajeError);
+
+            if (resultado)
+            {
+                return Json(new { operacionExitosa = true, mensaje = mensajeError });
+            }
+            else
+            {
+                return Json(new { operacionExitosa = false, mensaje = mensajeError });
+            }
         }
     }
 }

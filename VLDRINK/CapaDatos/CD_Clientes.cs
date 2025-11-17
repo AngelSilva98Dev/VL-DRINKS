@@ -15,7 +15,7 @@ namespace CapaDatos
             {
                 using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
                 {
-                    string consulta = "SELECT IdCliente, Nombres, Apellidos, Correo, Reestablecer, PasswordHash, PasswordSalt FROM CLIENTE WHERE Correo = @correo";
+                    string consulta = "SELECT IdCliente, Nombres, Correo, Reestablecer, FechaUltimoReinicio, PasswordHash, PasswordSalt FROM CLIENTE WHERE Correo = @correo";
 
                     SqlCommand comando = new SqlCommand(consulta, objConexion);
                     comando.Parameters.AddWithValue("@correo", correo);
@@ -31,11 +31,13 @@ namespace CapaDatos
                             {
                                 IdCliente = Convert.ToInt32(lector["IdCliente"]),
                                 Nombres = lector["Nombres"].ToString(),
-                                Apellidos = lector["Apellidos"].ToString(),
                                 Correo = lector["Correo"].ToString(),
                                 Reestablecer = Convert.ToBoolean(lector["Reestablecer"]),
                                 PasswordHash = (byte[])lector["PasswordHash"],
-                                PasswordSalt = (byte[])lector["PasswordSalt"]
+                                PasswordSalt = (byte[])lector["PasswordSalt"],
+                                FechaUltimoReinicio = lector["FechaUltimoReinicio"] == DBNull.Value
+                                                    ? (DateTime?)null
+                                                    : Convert.ToDateTime(lector["FechaUltimoReinicio"])
                             };
                         }
                     }
@@ -45,7 +47,7 @@ namespace CapaDatos
             {
                 throw ex;
             }
-            return cliente; 
+            return cliente;
         }
 
         public int Registrar(Cliente obj, out string Mensaje)
@@ -120,6 +122,39 @@ namespace CapaDatos
                 cliente = null;
             }
             return cliente;
+        }
+
+        public bool ActualizarPassword(int idCliente, byte[] passwordHash, byte[] passwordSalt, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
+                {
+                    string consulta = "UPDATE CLIENTE SET " +
+                                      "PasswordHash = @PasswordHash, " +
+                                      "PasswordSalt = @PasswordSalt, " +
+                                      "Reestablecer = 0, " +
+                                      "FechaUltimoReinicio = GETDATE() " +
+                                      "WHERE IdCliente = @IdCliente";
+
+                    SqlCommand comando = new SqlCommand(consulta, objConexion);
+                    comando.Parameters.AddWithValue("@IdCliente", idCliente);
+                    comando.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                    comando.Parameters.AddWithValue("@PasswordSalt", passwordSalt);
+                    comando.CommandType = CommandType.Text;
+
+                    objConexion.Open();
+                    resultado = comando.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Mensaje = ex.Message;
+                resultado = false;
+            }
+            return resultado;
         }
     }
 }

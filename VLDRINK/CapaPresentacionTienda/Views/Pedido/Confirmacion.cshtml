@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Pedido Confirmado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int idPedido = (int)ViewBag.IdPedido;
+    string metodoPago = (string)ViewBag.MetodoPago;
+    string alias = (string)ViewBag.Alias;
+    string cbu = (string)ViewBag.CBU;
+    string whatsapp = (string)ViewBag.WhatsApp;
+
+
+    string mensajeWhatsApp = $"Hola, te envío el comprobante del Pedido %23{idPedido}";
+    string linkWhatsApp = $"https://wa.me/{whatsapp}?text={mensajeWhatsApp}";
+}
+
+<div class="container py-5 text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <i class="fas fa-check-circle text-success" style="font-size: 6rem;"></i>
+
+            <h1 class="mt-3">¡Gracias por tu pedido!</h1>
+            <h4 class="text-muted">Tu pedido N° <strong>@idPedido</strong> ha sido recibido.</h4>
+
+            <hr class="my-4">
+
+            @if (metodoPago == "Transferencia")
+            {
+                <div class="alert alert-info">
+                    <h5 class="alert-heading">¡Solo falta un paso!</h5>
+                    <p>Para confirmar tu pedido, por favor realiza la transferencia a los siguientes datos:</p>
+                    <ul class="list-unstyled text-start w-75 mx-auto">
+                        <li><strong>ALIAS:</strong> @alias</li>
+                        <li><strong>CBU:</strong> @cbu</li>
+                    </ul>
+                    <hr>
+                    <p class="mb-0">
+                        Una vez realizada, envíanos el comprobante por WhatsApp para que podamos preparar tu pedido.
+                    </p>
+                </div>
+
+                <a href="@linkWhatsApp" target="_blank" class="btn btn-success btn-lg mt-3">
+                    <i class="fab fa-whatsapp"></i> Enviar Comprobante por WhatsApp
+                </a>
+            }
+            else
+            {
+                <div class="alert alert-light border">
+                    <h5 class="alert-heading">¡Pedido en preparación!</h5>
+                    <p>Prepararemos tu pedido y lo pagarás en efectivo al momento de la entrega.</p>
+                </div>
+            }
+
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Tienda")" class="btn btn-primary">Volver a la Tienda</a>
+            </div>
+
+        </div>
+    </div>
+</div>

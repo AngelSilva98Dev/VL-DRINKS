@@ -61,24 +61,25 @@ namespace CapaPresentacionTienda.Controllers
             try
             {
                 CN_Productos objCN_Productos = new CN_Productos();
-
                 Producto producto = objCN_Productos.ObtenerProducto(idProducto);
 
                 if (producto == null)
-                {
                     return Json(new { success = false, message = "Producto no encontrado." });
-                }
 
                 if (producto.Stock < cantidad)
-                {
                     return Json(new { success = false, message = "No hay stock suficiente." });
-                }
 
                 Carrito carrito = GetCarrito();
-
                 carrito.AgregarItem(producto, cantidad);
 
-                return Json(new { success = true, totalItems = carrito.Items.Count });
+                bool sinStock = producto.Stock - cantidad <= 0;
+
+                return Json(new
+                {
+                    success = true,
+                    totalItems = carrito.Items.Count,
+                    sinStock = sinStock
+                });
             }
             catch (Exception ex)
             {

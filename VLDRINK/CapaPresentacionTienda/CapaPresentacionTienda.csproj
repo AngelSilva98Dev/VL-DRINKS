@@ -171,6 +171,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Imagenes\Logo2PNG.png" />
+    <Content Include="Content\Imagenes\LOGOPNG.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -209,6 +211,7 @@
     <Content Include="Views\Tienda\Carrito.cshtml" />
     <Content Include="Views\Pedido\Checkout.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Pedido\Confirmacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -250,6 +253,10 @@
     <ProjectReference Include="..\CapaNegocio\CapaNegocio.csproj">
       <Project>{32e01b3d-d7c8-4920-a5f5-4c0ea307e934}</Project>
       <Name>CapaNegocio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VLDRINKS.CORE\VLDRINKS.CORE.csproj">
+      <Project>{8da60d78-296a-4c42-b6be-e31888c06251}</Project>
+      <Name>VLDRINKS.CORE</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

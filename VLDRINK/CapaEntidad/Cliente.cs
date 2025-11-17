@@ -19,7 +19,7 @@ namespace CapaEntidad
         public string Telefono { get; set; }
         public string Direccion { get; set; }
         public bool EsMayorDeEdad { get; set; }
-
+        public DateTime? FechaUltimoReinicio { get; set; }
 
         [MaxLength(20)]
         public byte[] PasswordHash { get; set; }

@@ -47,18 +47,16 @@ namespace CapaNegocio
                 return 0;
             }
 
-
             objPedido.TotalProducto = listaDetallePedido.Count;
-            objPedido.MontoTotal = listaDetallePedido.Sum(item => item.Total);
+
+            objPedido.Subtotal = listaDetallePedido.Sum(i => i.Total);
+
+            objPedido.MontoTotal = objPedido.Subtotal + objPedido.CostoEnvio;
 
             if (objPedido.MetodoPago == "Transferencia")
-            {
                 objPedido.Estado = "Esperando Comprobante";
-            }
             else
-            {
                 objPedido.Estado = "En Preparacion";
-            }
 
             return objCapaDato.Registrar(objPedido, listaDetallePedido, out Mensaje);
         }

@@ -43,8 +43,6 @@ namespace CAPAPRESENTACION.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-
         [HttpGet]
         [AllowAnonymous]
         public ActionResult LogOut()
@@ -57,14 +55,11 @@ namespace CAPAPRESENTACION.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-
-
         [HttpGet]
         public ActionResult Registrar()
         {
             return View();
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -106,11 +101,8 @@ namespace CAPAPRESENTACION.Controllers
             string mensajeError = string.Empty;
             CN_Usuarios objNegocio = new CN_Usuarios();
 
-            // Llamaremos a la CapaNegocio. El método 'SolicitarReestablecimiento'
-
             bool resultado = objNegocio.SolicitarReestablecimiento(email, out mensajeError);
 
-            // Devolvemos una respuesta JSON que el JavaScript pueda entender
             if (resultado)
             {
                 return Json(new { operacionExitosa = true, mensaje = mensajeError });

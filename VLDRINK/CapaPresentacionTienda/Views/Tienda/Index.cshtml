@@ -8,11 +8,14 @@
     string categoriaActual = (string)ViewBag.CategoriaActual;
 }
 
-<header class="bg-dark py-5">
+<header class="bg-dark py-0">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">VL-DRINKS</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Encuentra las mejores bebidas</p>
+
+            <img src="@Url.Content("~/Content/imagenes/LOGOPNG.png")" alt="VL-DRINKS Logo"
+                 class="img-fluid"
+                 style="max-height: 360px; margin-bottom: 1rem;" />
+            <p class="lead fw-normal text-white-50 mb-0">Las mejores bebidas</p>
         </div>
     </div>
 </header>
@@ -88,36 +91,62 @@
 
 @section scripts {
     <script>
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            $("#producto-grid").on("click", ".btn-agregar-carrito", function () {
+        var toastEl = document.getElementById('toastCarrito');
+        var toast = new bootstrap.Toast(toastEl);
 
-                var idProducto = $(this).data("idproducto");
-                var cantidad = 1;
-                var btn = $(this);
-                btn.prop("disabled", true).text("Agregando...");
+        $("#producto-grid").on("click", ".btn-agregar-carrito", function () {
 
-                $.ajax({
-                    url: '@Url.Action("AgregarAlCarrito", "Tienda")',
-                    type: "POST",
-                    data: { idProducto: idProducto, cantidad: cantidad },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.success) {
-                            alert("¡Añadido!");
-                        } else {
-                            alert(response.message);
+            var idProducto = $(this).data("idproducto");
+            var cantidad = 1;
+
+            var btn = $(this);
+            btn.prop("disabled", true).text("Agregando...");
+
+            $.ajax({
+                url: '@Url.Action("AgregarAlCarrito", "Tienda")',
+                type: "POST",
+                data: { idProducto: idProducto, cantidad: cantidad },
+                dataType: "json",
+                success: function (response) {
+
+                    if (response.success) {
+
+                        $("#carrito-conteo").text(response.totalItems);
+
+                        $("#toastCarritoMensaje").text("Producto añadido al carrito");
+                        toast.show();
+
+                    } else {
+
+                        if (response.message.includes("stock")) {
+                            btn.prop("disabled", true).text("Sin stock");
                         }
-                    },
-                    error: function () {
-                        alert("Error: No se pudo contactar al servidor.");
-                    },
-                    complete: function () {
+
+                        $("#toastCarritoMensaje").text(response.message);
+                        $("#toastCarrito")
+                            .removeClass("bg-success")
+                            .addClass("bg-danger");
+                        toast.show();
+                    }
+                },
+                error: function () {
+                    $("#toastCarritoMensaje").text("Error: No se pudo contactar al servidor.");
+                    $("#toastCarrito")
+                        .removeClass("bg-success")
+                        .addClass("bg-danger");
+                    toast.show();
+                },
+                complete: function () {
+
+                    if (!btn.text().includes("Sin stock")) {
                         btn.prop("disabled", false).text("Agregar (1)");
                     }
-                });
+                }
             });
-
         });
+
+    });
     </script>
 }

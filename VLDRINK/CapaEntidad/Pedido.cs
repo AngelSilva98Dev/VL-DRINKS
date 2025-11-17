@@ -18,6 +18,8 @@ namespace CapaEntidad
         public string MetodoPago { get; set; }
         public string Estado { get; set; }
         public DateTime FechaPedido { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal CostoEnvio { get; set; }
         public List<DetallePedido> objDetallePedido { get; set; }
     }
 }
