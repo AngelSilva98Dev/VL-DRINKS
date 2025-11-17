@@ -4,17 +4,13 @@
 @{
     ViewBag.Title = "Tienda";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
     string categoriaActual = (string)ViewBag.CategoriaActual;
 }
 
-<header class="bg-dark py-0">
+<header class="bg-dark py-3">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-
-            <img src="@Url.Content("~/Content/imagenes/LOGOPNG.png")" alt="VL-DRINKS Logo"
-                 class="img-fluid"
-                 style="max-height: 360px; margin-bottom: 1rem;" />
+            <img src="@Url.Content("~/Content/imagenes/LOGOPNG.png")" alt="VL-DRINKS Logo" class="img-fluid" style="max-height: 160px; margin-bottom: 1rem;" />
             <p class="lead fw-normal text-white-50 mb-0">Las mejores bebidas</p>
         </div>
     </div>
@@ -27,12 +23,10 @@
             <div class="col-lg-3">
                 <h4 class="mb-3">Categorías</h4>
                 <div class="list-group">
-
                     <a href="@Url.Action("Index", "Tienda", new { pagina = 1, categoria = "all" })"
                        class="list-group-item list-group-item-action @(categoriaActual == "all" ? "active" : "")">
                         Mostrar Todas
                     </a>
-
                     @foreach (var categoria in Model.Categorias)
                     {
                         <a href="@Url.Action("Index", "Tienda", new { pagina = 1, categoria = categoria.Descripcion })"
@@ -45,7 +39,6 @@
 
             <div class="col-lg-9">
                 <div id="producto-grid" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
                     @foreach (var producto in Model.Productos)
                     {
                         <div class="col mb-5 product-card" data-categoria-producto="@producto.objCategoria.Descripcion">
@@ -83,25 +76,40 @@
                             LiElementClasses = new[] { "page-item" }
                         })
                 </div>
-
             </div>
         </div>
     </div>
 </section>
 
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+    <div id="toastCarrito"
+         class="toast text-white bg-success border-0"
+         role="alert" aria-live="assertive" aria-atomic="true">
+
+        <div class="d-flex">
+            <div class="toast-body" id="toastCarritoMensaje">
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
+
+
 @section scripts {
     <script>
     $(document).ready(function () {
 
-        var toastEl = document.getElementById('toastCarrito');
-        var toast = new bootstrap.Toast(toastEl);
+        // Inicializamos el Toast (que ahora vive en esta vista)
+        var toastCarrito = new bootstrap.Toast(document.getElementById('toastCarrito'));
 
+        // Lógica de "Agregar al Carrito"
         $("#producto-grid").on("click", ".btn-agregar-carrito", function () {
 
-            var idProducto = $(this).data("idproducto");
+            var btn = $(this);
+            var idProducto = btn.data("idproducto");
             var cantidad = 1;
 
-            var btn = $(this);
             btn.prop("disabled", true).text("Agregando...");
 
             $.ajax({
@@ -109,40 +117,51 @@
                 type: "POST",
                 data: { idProducto: idProducto, cantidad: cantidad },
                 dataType: "json",
+
                 success: function (response) {
+
+                    // Reseteamos el color del Toast
+                    $("#toastCarrito").removeClass("bg-danger").addClass("bg-success");
 
                     if (response.success) {
 
+                        $("#toastCarritoMensaje").text("¡Producto añadido!");
+                        toastCarrito.show();
+
+                        // Actualizamos el contador del _Layout
                         $("#carrito-conteo").text(response.totalItems);
 
-                        $("#toastCarritoMensaje").text("Producto añadido al carrito");
-                        toast.show();
+                        // Animación del contador
+                        $("#carrito-conteo")
+                            .fadeOut(150).fadeIn(150)
+                            .css("transform", "scale(1.3)")
+                            .delay(150)
+                            .queue(function (next) {
+                                $(this).css("transform", "scale(1)");
+                                next();
+                            });
 
-                    } else {
-
-                        if (response.message.includes("stock")) {
+                        // Lógica de Stock (de tu script)
+                        if (response.sinStock === true) {
                             btn.prop("disabled", true).text("Sin stock");
+                        } else {
+                            btn.prop("disabled", false).text("Agregar (1)");
                         }
 
+                    } else {
+                        // Si (response.success == false)
                         $("#toastCarritoMensaje").text(response.message);
-                        $("#toastCarrito")
-                            .removeClass("bg-success")
-                            .addClass("bg-danger");
-                        toast.show();
-                    }
-                },
-                error: function () {
-                    $("#toastCarritoMensaje").text("Error: No se pudo contactar al servidor.");
-                    $("#toastCarrito")
-                        .removeClass("bg-success")
-                        .addClass("bg-danger");
-                    toast.show();
-                },
-                complete: function () {
-
-                    if (!btn.text().includes("Sin stock")) {
+                        $("#toastCarrito").removeClass("bg-success").addClass("bg-danger");
+                        toastCarrito.show();
                         btn.prop("disabled", false).text("Agregar (1)");
                     }
+                },
+
+                error: function () {
+                    $("#toastCarritoMensaje").text("Error: no se pudo contactar al servidor.");
+                    $("#toastCarrito").removeClass("bg-success").addClass("bg-danger");
+                    toastCarrito.show();
+                    btn.prop("disabled", false).text("Agregar (1)" );
                 }
             });
         });
