@@ -1,18 +1,18 @@
-﻿@model List<CapaEntidad.Pedido>
-@{
+﻿@{
     ViewBag.Title = "Pedidos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-
+    // --- 1. Definimos los estados y sus colores ---
     var estados = new Dictionary<string, string> {
         { "Esperando Comprobante", "secondary" }, // Gris
         { "En Preparacion", "light text-dark border" }, // Blanco
-        { "Enviado", "info" },                   // Verde Claro (usamos 'info')
-        { "Completado", "success" },             // Verde Oscuro
-        { "Reclamo", "warning" },                // Naranja
-        { "Error", "danger" }                    // Rojo
+        { "Enviado", "info" },
+        { "Completado", "success" },
+        { "Reclamo", "warning" },
+        { "Error", "danger" }
     };
 
+    // Lista para los dropdowns
     var estadosDropdown = new List<string> {
         "Esperando Comprobante",
         "En Preparacion",
@@ -33,7 +33,7 @@
     {
         string estado = kvp.Key;
         string color = kvp.Value;
-        bool esActivo = (estado == "Esperando Comprobante");
+        bool esActivo = (estado == "Esperando Comprobante"); // Por defecto
 
         <li class="nav-item" role="presentation">
             <a class="nav-link @(esActivo ? "active" : "")
@@ -48,6 +48,7 @@
         </li>
     }
 </ul>
+
 <div class="tab-content" id="tab-content">
     <div class="tab-pane fade show active" role="tabpanel">
         <div class="row mt-4" id="pedidos-container" style="min-height: 300px;">
@@ -76,6 +77,12 @@
             </div>
             <hr class="my-2">
             <div class="mt-2 mb-0 text-gray-800">
+                <strong>Subtotal: $<span class="pedido-subtotal">0.00</span></strong>
+            </div>
+            <div class="mt-1 mb-0 text-gray-800">
+                <strong>Envío: $<span class="pedido-costoenvio">0.00</span></strong>
+            </div>
+            <div class="mt-1 mb-0 text-gray-800">
                 <strong>Total: $<span class="pedido-total">0.00</span></strong>
             </div>
 
@@ -108,37 +115,34 @@
             var estadoActual = "Esperando Comprobante"; 
             var timer; 
 
-
             function cargarPedidos(estado) {
-         
                 estadoActual = estado;
-
 
                 $("#pedidos-container").html('<div class="col-12 text-center mt-5"><div class="spinner-border" role="status"></div><p>Cargando...</p></div>');
 
                 $.ajax({
-                    url: '@Url.Action("ListarPedidos", "Home")',
+                    url: '@Url.Action("ListarPedidos", "Home")', 
                     type: "GET",
                     data: { estado: estado },
                     dataType: "json",
                     success: function (response) {
-                        $("#pedidos-container").empty();
+                        $("#pedidos-container").empty(); 
 
                         if (response.data.length === 0) {
                             $("#pedidos-container").html('<div class="col-12"><div class="alert alert-success" role="alert"><i class="fas fa-check-circle"></i> ¡Excelente! No hay pedidos en este estado.</div></div>');
                             return;
                         }
 
-      
                         $.each(response.data, function (index, pedido) {
-                     
+
                             var cuadro = $("#plantilla-cuadro").clone();
                             cuadro.removeAttr("id"); 
 
-                  
                             cuadro.find(".pedido-id").text(pedido.IdPedido);
                             cuadro.find(".pedido-metodo").text(pedido.MetodoPago);
                             cuadro.find(".pedido-contacto").text(pedido.Contacto);
+                            cuadro.find(".pedido-subtotal").text(pedido.Subtotal.toFixed(2));
+                            cuadro.find(".pedido-costoenvio").text(pedido.CostoEnvio.toFixed(2));
                             cuadro.find(".pedido-total").text(pedido.MontoTotal.toFixed(2));
 
                             var fecha = new Date(parseInt(pedido.FechaPedido.substr(6)));
@@ -184,29 +188,31 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '@Url.Action("CambiarEstado", "Home")',
+                            url: '@Url.Action("CambiarEstado", "Home")', 
                             type: "POST",
                             data: { idPedido: idPedido, nuevoEstado: nuevoEstado },
                             dataType: "json",
                             success: function (response) {
                                 if (response.operacionExitosa) {
                                     Swal.fire('¡Actualizado!', 'El estado del pedido ha sido cambiado.', 'success');
+
                                     cargarPedidos(estadoActual);
                                 } else {
                                     Swal.fire('Error', response.mensaje, 'error');
-                                    cargarPedidos(estadoActual); 
+                                    cargarPedidos(estadoActual);
                                 }
                             }
                         });
                     } else {
+         
                         cargarPedidos(estadoActual);
                     }
                 });
             });
 
-
             cargarPedidos("Esperando Comprobante");
-        
+
+
             setInterval(function () {
                 cargarPedidos(estadoActual);
             }, 30000); 

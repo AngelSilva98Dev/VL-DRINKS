@@ -11,21 +11,13 @@ namespace CAPAPRESENTACION.Controllers
     [Authorize]
     public class HomeController : BaseController
     {
-        public ActionResult Index(string estado) 
+        public ActionResult Index()
         {
-
             CN_Pedidos objCN_Pedidos = new CN_Pedidos();
 
+            string estadoPendiente = "Esperando Comprobante";
 
-            if (string.IsNullOrEmpty(estado))
-            {
-                estado = "Esperando Comprobante";
-            }
-
-            List<Pedido> listaPedidos = objCN_Pedidos.Listar(estado);
-
-
-            ViewBag.EstadoActual = estado;
+            List<Pedido> listaPedidos = objCN_Pedidos.Listar(estadoPendiente);
 
             return View(listaPedidos);
         }
@@ -56,9 +48,20 @@ namespace CAPAPRESENTACION.Controllers
             return Json(new { data = listaParaElCliente }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult ListarPedidos(string estado)
+        {
+            if (string.IsNullOrEmpty(estado))
+            {
+                estado = "Esperando Comprobante";
+            }
+
+            List<Pedido> listaPedidos = new CN_Pedidos().Listar(estado);
+
+            return Json(new { data = listaPedidos }, JsonRequestBehavior.AllowGet);
+        }
 
         //Crear Administradores
-
         [HttpPost]
         public JsonResult GuardarUsuario(string Nombres, string Apellidos, string Correo, bool Activo)
         {

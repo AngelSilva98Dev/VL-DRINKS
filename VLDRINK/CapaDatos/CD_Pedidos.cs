@@ -18,8 +18,7 @@ namespace CapaDatos
             {
                 using (SqlConnection objConexion = new SqlConnection(Conexion.conex))
                 {
-
-                    string consulta = "SELECT IdPedido, Contacto, MontoTotal, MetodoPago, Estado, FechaPedido FROM PEDIDO";
+                    string consulta = "SELECT IdPedido, Contacto, MontoTotal, MetodoPago, Estado, FechaPedido, Subtotal, CostoEnvio FROM PEDIDO";
 
                     if (!string.IsNullOrEmpty(estado) && estado != "Todos")
                     {
@@ -49,7 +48,9 @@ namespace CapaDatos
                                 MontoTotal = Convert.ToDecimal(lector["MontoTotal"]),
                                 MetodoPago = lector["MetodoPago"].ToString(),
                                 Estado = lector["Estado"].ToString(),
-                                FechaPedido = Convert.ToDateTime(lector["FechaPedido"])
+                                FechaPedido = Convert.ToDateTime(lector["FechaPedido"]),
+                                Subtotal = Convert.ToDecimal(lector["Subtotal"]),
+                                CostoEnvio = Convert.ToDecimal(lector["CostoEnvio"])
                             });
                         }
                     }
