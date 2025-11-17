@@ -55,6 +55,23 @@ namespace CapaPresentacionTienda.Controllers
             return View(carrito);
         }
 
+
+
+        [HttpGet]
+        public ActionResult DetalleProducto(int id)
+        {
+            CN_Productos objCN_Productos = new CN_Productos();
+
+            Producto producto = objCN_Productos.ObtenerProducto(id);
+
+            if (producto == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(producto);
+        }
+
         [HttpPost]
         public JsonResult AgregarAlCarrito(int idProducto, int cantidad)
         {
@@ -64,25 +81,24 @@ namespace CapaPresentacionTienda.Controllers
                 Producto producto = objCN_Productos.ObtenerProducto(idProducto);
 
                 if (producto == null)
+                {
                     return Json(new { success = false, message = "Producto no encontrado." });
+                }
 
                 if (producto.Stock < cantidad)
+                {
                     return Json(new { success = false, message = "No hay stock suficiente." });
+                }
 
                 Carrito carrito = GetCarrito();
+
                 carrito.AgregarItem(producto, cantidad);
 
-                bool sinStock = producto.Stock - cantidad <= 0;
-
-                return Json(new
-                {
-                    success = true,
-                    totalItems = carrito.Items.Count,
-                    sinStock = sinStock
-                });
+                return Json(new { success = true, totalItems = carrito.Items.Count });
             }
             catch (Exception ex)
             {
+                // Si algo falla (ej. la BBDD)
                 return Json(new { success = false, message = ex.Message });
             }
         }

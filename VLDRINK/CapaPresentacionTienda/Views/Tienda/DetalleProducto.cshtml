@@ -1,0 +1,133 @@
+﻿@model CapaEntidad.Producto
+@{
+    ViewBag.Title = Model.Nombre;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+
+            <div class="col-md-6">
+                <img class="card-img-top mb-5 mb-md-0"
+                     src="data:image/jpeg;base64,@Model.Imagen"
+                     alt="@Model.Nombre" />
+            </div>
+
+            <div class="col-md-6">
+                <div class="small mb-1">SKU: @Model.IdProducto</div>
+
+                <h1 class="display-5 fw-bolder">@Model.Nombre</h1>
+
+                <div class="fs-5 mb-5">
+                    <span>$@Model.Precio</span>
+                </div>
+
+                <p class="lead">@Model.Descripcion</p>
+
+                <hr />
+
+                <div class="small mb-2 text-muted">
+                    Stock disponible: <strong>@Model.Stock</strong>
+                </div>
+
+                <div class="d-flex">
+                    <input class="form-control text-center me-3"
+                           id="inputQuantity"
+                           type="number"
+                           value="1"
+                           min="1"
+                           max="@Model.Stock" style="max-width: 5rem" />
+
+                    <button class="btn btn-outline-dark flex-shrink-0"
+                            type="button"
+                            id="btn-agregar-detalle"
+                            data-idproducto="@Model.IdProducto">
+                        <i class="bi-cart-fill me-1"></i>
+                        Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">Productos Relacionados</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">Fancy Product</h5>
+                            $40.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+            $("#btn-agregar-detalle").on("click", function () {
+
+                var idProducto = $(this).data("idproducto");
+                var cantidad = $("#inputQuantity").val();
+                var stockMaximo = @Model.Stock;
+                var btn = $(this);
+
+                if (parseInt(cantidad) > stockMaximo) {
+                    Swal.fire('Stock insuficiente', 'No puedes agregar más de ' + stockMaximo + ' unidades.', 'warning');
+                    return;
+                }
+                if (parseInt(cantidad) <= 0) {
+                     Swal.fire('Cantidad inválida', 'Debes agregar al menos 1 unidad.', 'warning');
+                    return;
+                }
+
+                btn.prop("disabled", true).text("Agregando...");
+
+                $.ajax({
+                    url: '@Url.Action("AgregarAlCarrito", "Tienda")',
+                    type: "POST",
+                    data: {
+                        idProducto: idProducto,
+                        cantidad: cantidad 
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            $("#carrito-conteo").text(response.totalItems);
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Añadido!',
+                                text: 'Producto agregado al carrito.',
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        } else {
+                            Swal.fire('Error', response.message, 'error');
+                        }
+                    },
+                    error: function () {
+                        Swal.fire('Error', 'No se pudo contactar al servidor.', 'error');
+                    },
+                    complete: function () {
+                        btn.prop("disabled", false).text("Agregar al Carrito");
+                    }
+                });
+            });
+        });
+    </script>
+}
